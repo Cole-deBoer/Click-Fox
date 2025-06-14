@@ -1,0 +1,30 @@
+{
+  "backgrounds": {
+    "main": "#18181b",
+    "card": "#23232a",
+    "input": "#222228"
+  },
+  "text": {
+    "primary": "#f3f4f6",
+    "secondary": "#a1a1aa",
+    "muted": "#6b7280",
+    "highlight": "#eab308"
+  },
+  "borders": {
+    "default": "#27272a",
+    "highlight": "#eab308"
+  },
+  "buttons": {
+    "primaryBg": "#eab308",
+    "primaryText": "#18181b",
+    "secondaryBg": "#23232a",
+    "secondaryText": "#f3f4f6"
+  },
+  "icons": {
+    "main": "#eab308",
+    "secondary": "#f3f4f6"
+  },
+  "shadows": {
+    "main": "rgba(234, 179, 8, 0.1)"
+  }
+} 
