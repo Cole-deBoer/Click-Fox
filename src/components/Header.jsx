@@ -3,34 +3,26 @@ import { RotateCcw, Settings } from 'lucide-react';
 import foxLogo from '../assets/fox-logo.png';
 import theme from '../assets/theme.json';
 
-const MODES = [
-  { key: 'time', label: 'time', presets: [1, 5, 10] },
-  { key: 'click', label: 'click', presets: [5, 10, 15] },
-  { key: 'speed', label: 'speed', presets: [1, 3, 5] }
-];
-
-function getCustomLabel(mode) {
-  switch (mode) {
-    case 'time': return 'seconds';
-    case 'click': return 'clicks';
-    case 'speed': return 'runs';
-    default: return '';
-  }
-}
-
-const Header = ({
-  selectedMode,
-  selectedPreset,
+const Header = ({ 
+  selectedMode, 
+  selectedPreset, 
   customValue,
-  onModeChange,
+  onModeChange, 
   onPresetChange,
   onCustomValueChange,
-  onRestart,
-  isActive
+  onRestart, 
+  isActive 
 }) => {
   const [showCustomInput, setShowCustomInput] = useState(false);
 
-  // Handle custom value form submit
+  const modes = [
+    { key: 'time', label: 'time', presets: [1, 5, 10] },
+    { key: 'click', label: 'click', presets: [5, 10, 15] },
+    { key: 'speed', label: 'speed', presets: [1, 3, 5] }
+  ];
+
+  const currentMode = modes.find(m => m.key === selectedMode);
+
   const handleCustomSubmit = (e) => {
     e.preventDefault();
     const value = parseInt(e.target.customInput.value);
@@ -40,109 +32,189 @@ const Header = ({
     }
   };
 
+  const getCustomLabel = () => {
+    switch (selectedMode) {
+      case 'time': return 'seconds';
+      case 'click': return 'clicks';
+      case 'speed': return 'runs';
+      default: return '';
+    }
+  };
+
   return (
     <header className="w-full max-w-6xl mx-auto px-6 py-6">
       <div className="flex items-center justify-between mb-8">
-        {/* Logo and Title */}
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 px-3 py-2 rounded-lg" style={{ backgroundColor: 'var(--button-primary-bg)' }}>
-            <img src={foxLogo} alt="ClickFox Logo" className="w-8 h-8 object-contain" style={{ filter: 'drop-shadow(0 0 2px var(--icon-main))' }} />
+          <div className="relative flex items-center gap-2 px-4 py-2 bg-gradient-to-br from-white/20 via-gray-300/30 to-white/20 backdrop-blur-sm rounded-xl border border-white/20 shadow-lg" style={{backgroundColor: theme.backgrounds.card}}>
+            {/* Fox Logo */}
+            <img src={foxLogo} alt="Fox Logo" className="w-8 h-8" />
           </div>
-          <h1 className="text-2xl font-light" style={{ color: 'var(--text-primary)' }}>clickfox</h1>
+          <h1 className="text-2xl font-light" style={{color: theme.text.primary}}>click fox</h1>
         </div>
-        {/* Restart Button */}
+        
         <button
           onClick={onRestart}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200"
-          style={{ color: 'var(--text-secondary)', background: 'var(--background-card)' }}
+          className="flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105"
+          style={{
+            color: theme.text.secondary,
+            backgroundColor: 'transparent'
+          }}
+          onMouseEnter={(e) => {
+            e.target.style.color = theme.text.primary;
+            e.target.style.backgroundColor = theme.backgrounds.card;
+          }}
+          onMouseLeave={(e) => {
+            e.target.style.color = theme.text.secondary;
+            e.target.style.backgroundColor = 'transparent';
+          }}
         >
-          <RotateCcw className="w-4 h-4" style={{ color: 'var(--icon-secondary)' }} />
+          <RotateCcw className="w-4 h-4" />
           <span className="text-sm">restart test</span>
         </button>
       </div>
 
-      {/* Mode Selection */}
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-between">
+        {/* Game Modes - Left Side with animations */}
         <div className="flex items-center gap-8">
-          {MODES.map((mode) => (
-            <div key={mode.key} className="flex items-center gap-4">
-              <span className="text-sm" style={{ color: 'var(--text-muted)' }}>
+          {modes.map((mode, index) => (
+            <div key={mode.key} className="flex items-center gap-4 animate-slide-in" style={{animationDelay: `${index * 0.1}s`}}>
+              <span className={`text-sm transition-all duration-300 ${
+                selectedMode === mode.key ? 'scale-110' : ''
+              }`} style={{
+                color: selectedMode === mode.key ? theme.text.highlight : theme.text.muted
+              }}>
                 {mode.key === 'time' ? '@' : mode.key === 'click' ? '#' : '⚡'}
               </span>
               <button
                 onClick={() => onModeChange(mode.key)}
                 disabled={isActive}
-                className={`text-sm font-medium transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50`}
-                style={{ color: selectedMode === mode.key ? 'var(--text-highlight)' : 'var(--text-muted)' }}
+                className={`text-sm font-medium transition-all duration-300 transform ${
+                  selectedMode === mode.key
+                    ? 'scale-105'
+                    : 'hover:scale-102'
+                } disabled:cursor-not-allowed disabled:opacity-50`}
+                style={{
+                  color: selectedMode === mode.key ? theme.text.highlight : theme.text.muted
+                }}
+                onMouseEnter={(e) => {
+                  if (!isActive && selectedMode !== mode.key) {
+                    e.target.style.color = theme.text.secondary;
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (!isActive && selectedMode !== mode.key) {
+                    e.target.style.color = theme.text.muted;
+                  }
+                }}
               >
                 {mode.label}
               </button>
-              {/* Presets and Custom for selected mode */}
-              {selectedMode === mode.key && (
-                <div className="flex gap-2 ml-2">
-                  {mode.presets.map((preset) => (
-                    <button
-                      key={preset}
-                      onClick={() => onPresetChange(preset)}
-                      disabled={isActive}
-                      className={`px-2 py-1 rounded text-sm transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-50`}
-                      style={{
-                        background: selectedPreset === preset && !customValue ? 'var(--button-primary-bg)' : 'transparent',
-                        color: selectedPreset === preset && !customValue ? 'var(--button-primary-text)' : 'var(--text-muted)'
-                      }}
-                    >
-                      {preset}
-                    </button>
-                  ))}
-                  <button
-                    onClick={() => setShowCustomInput(!showCustomInput)}
-                    disabled={isActive}
-                    className={`px-2 py-1 rounded text-sm transition-all duration-200 flex items-center gap-1 disabled:cursor-not-allowed disabled:opacity-50`}
-                    style={{
-                      background: customValue ? 'var(--button-primary-bg)' : 'transparent',
-                      color: customValue ? 'var(--button-primary-text)' : 'var(--text-muted)'
-                    }}
-                  >
-                    <Settings className="w-3 h-3" />
-                    {customValue || 'custom'}
-                  </button>
-                </div>
-              )}
             </div>
           ))}
         </div>
+
+        {/* Game Settings - Right Side with staggered animations */}
+        <div className="flex items-center gap-2 animate-fade-in-right">
+          {currentMode.presets.map((preset, index) => (
+            <button
+              key={preset}
+              onClick={() => onPresetChange(preset)}
+              disabled={isActive}
+              className={`px-3 py-1 rounded text-sm transition-all duration-300 transform animate-preset-appear ${
+                selectedPreset === preset && !customValue
+                  ? 'font-medium scale-105 shadow-lg'
+                  : 'hover:scale-105'
+              } disabled:cursor-not-allowed disabled:opacity-50`}
+              style={{
+                animationDelay: `${index * 0.05}s`,
+                backgroundColor: selectedPreset === preset && !customValue ? theme.buttons.primaryBg : 'transparent',
+                color: selectedPreset === preset && !customValue ? theme.buttons.primaryText : theme.text.muted,
+                border: selectedPreset === preset && !customValue ? `1px solid ${theme.borders.highlight}` : '1px solid transparent'
+              }}
+              onMouseEnter={(e) => {
+                if (!isActive && (selectedPreset !== preset || customValue)) {
+                  e.target.style.color = theme.text.secondary;
+                  e.target.style.backgroundColor = theme.backgrounds.card;
+                }
+              }}
+              onMouseLeave={(e) => {
+                if (!isActive && (selectedPreset !== preset || customValue)) {
+                  e.target.style.color = theme.text.muted;
+                  e.target.style.backgroundColor = 'transparent';
+                }
+              }}
+            >
+              {preset}
+            </button>
+          ))}
+          
+          <button
+            onClick={() => setShowCustomInput(!showCustomInput)}
+            disabled={isActive}
+            className={`px-3 py-1 rounded text-sm transition-all duration-300 flex items-center gap-1 transform animate-preset-appear ${
+              customValue
+                ? 'font-medium scale-105 shadow-lg'
+                : 'hover:scale-105'
+            } disabled:cursor-not-allowed disabled:opacity-50`}
+            style={{
+              animationDelay: '0.15s',
+              backgroundColor: customValue ? theme.buttons.primaryBg : 'transparent',
+              color: customValue ? theme.buttons.primaryText : theme.text.muted,
+              border: customValue ? `1px solid ${theme.borders.highlight}` : '1px solid transparent'
+            }}
+            onMouseEnter={(e) => {
+              if (!isActive && !customValue) {
+                e.target.style.color = theme.text.secondary;
+                e.target.style.backgroundColor = theme.backgrounds.card;
+              }
+            }}
+            onMouseLeave={(e) => {
+              if (!isActive && !customValue) {
+                e.target.style.color = theme.text.muted;
+                e.target.style.backgroundColor = 'transparent';
+              }
+            }}
+          >
+            <Settings className="w-3 h-3" />
+            {customValue || 'custom'}
+          </button>
+        </div>
       </div>
 
-      {/* Custom Value Input */}
       {showCustomInput && (
-        <div className="flex justify-center mt-4">
+        <div className="flex justify-end mt-4 animate-slide-down">
           <form onSubmit={handleCustomSubmit} className="flex items-center gap-2">
             <input
               name="customInput"
               type="number"
               min="1"
-              placeholder={`Enter ${getCustomLabel(selectedMode)}`}
-              className="px-3 py-1 border rounded text-sm focus:outline-none w-32"
+              placeholder={`Enter ${getCustomLabel()}`}
+              className="px-3 py-1 border rounded text-sm focus:outline-none w-32 transition-all duration-200 focus:scale-105"
               style={{
-                background: 'var(--background-input)',
-                borderColor: 'var(--border-default)',
-                color: 'var(--text-primary)',
-                outlineColor: 'var(--text-highlight)'
+                backgroundColor: theme.backgrounds.input,
+                borderColor: theme.borders.default,
+                color: theme.text.primary
               }}
               autoFocus
             />
             <button
               type="submit"
-              className="px-3 py-1 rounded text-sm font-medium transition-colors"
-              style={{ background: 'var(--button-primary-bg)', color: 'var(--button-primary-text)' }}
+              className="px-3 py-1 rounded text-sm font-medium transition-all duration-200 hover:scale-105 shadow-lg"
+              style={{
+                backgroundColor: theme.buttons.primaryBg,
+                color: theme.buttons.primaryText
+              }}
             >
               Set
             </button>
             <button
               type="button"
               onClick={() => setShowCustomInput(false)}
-              className="px-3 py-1 rounded text-sm transition-colors"
-              style={{ background: 'var(--button-secondary-bg)', color: 'var(--button-secondary-text)' }}
+              className="px-3 py-1 rounded text-sm transition-all duration-200 hover:scale-105"
+              style={{
+                backgroundColor: theme.backgrounds.card,
+                color: theme.text.secondary
+              }}
             >
               Cancel
             </button>
