@@ -4,6 +4,7 @@ import ClickArea from './components/ClickArea';
 import Results from './components/Results';
 import { useClickTest } from './hooks/useClickTest';
 import theme from './assets/theme.json';
+import { ThemeViewer } from './components/ThemeViewer';
 
 function App() {
   const [selectedMode, setSelectedMode] = useState('time');
@@ -120,7 +121,10 @@ function App() {
             <span style={{color: theme.text.muted}}>•</span>
             <span style={{color: theme.text.muted}}>restart test</span>
             <span style={{color: theme.text.muted}}>•</span>
-            <span style={{color: theme.text.muted}}>command line</span>
+
+          </div>
+          <div className="flex items-center justify-end px-5">
+            <ThemeViewer />
           </div>
         </footer>
       </div>
