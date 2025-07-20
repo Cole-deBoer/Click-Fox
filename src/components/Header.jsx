@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { RotateCcw, Settings } from 'lucide-react';
 import foxLogo from '../assets/fox-logo.png';
-import theme from '../assets/theme.json';
 
 const Header = ({ 
   selectedMode, 
@@ -11,7 +10,8 @@ const Header = ({
   onPresetChange,
   onCustomValueChange,
   onRestart, 
-  isActive 
+  isActive,
+  currentTheme 
 }) => {
   const [showCustomInput, setShowCustomInput] = useState(false);
 
@@ -45,26 +45,26 @@ const Header = ({
     <header className="w-full max-w-6xl mx-auto px-6 py-6">
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-3">
-          <div className="relative flex items-center gap-2 px-4 py-2 bg-gradient-to-br from-white/20 via-gray-300/30 to-white/20 backdrop-blur-sm rounded-xl border border-white/20 shadow-lg" style={{backgroundColor: theme.backgrounds.card}}>
+          <div className="relative flex items-center gap-2 px-4 py-2 bg-gradient-to-br from-white/20 via-gray-300/30 to-white/20 backdrop-blur-sm rounded-xl border border-white/20 shadow-lg" style={{backgroundColor: currentTheme.backgrounds.card}}>
             {/* Fox Logo */}
             <img src={foxLogo} alt="Fox Logo" className="w-8 h-8" />
           </div>
-          <h1 className="text-2xl font-light" style={{color: theme.text.primary}}>click fox</h1>
+          <h1 className="text-2xl font-light" style={{color: currentTheme.text.primary}}>click fox</h1>
         </div>
         
         <button
           onClick={onRestart}
           className="flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105"
           style={{
-            color: theme.text.secondary,
+            color: currentTheme.text.secondary,
             backgroundColor: 'transparent'
           }}
           onMouseEnter={(e) => {
-            e.target.style.color = theme.text.primary;
-            e.target.style.backgroundColor = theme.backgrounds.card;
+            e.target.style.color = currentTheme.text.primary;
+            e.target.style.backgroundColor = currentTheme.backgrounds.card;
           }}
           onMouseLeave={(e) => {
-            e.target.style.color = theme.text.secondary;
+            e.target.style.color = currentTheme.text.secondary;
             e.target.style.backgroundColor = 'transparent';
           }}
         >
@@ -81,7 +81,7 @@ const Header = ({
               <span className={`text-sm transition-all duration-300 ${
                 selectedMode === mode.key ? 'scale-110' : ''
               }`} style={{
-                color: selectedMode === mode.key ? theme.text.highlight : theme.text.muted
+                color: selectedMode === mode.key ? currentTheme.text.highlight : currentTheme.text.muted
               }}>
                 {mode.key === 'time' ? '@' : mode.key === 'click' ? '#' : '⚡'}
               </span>
@@ -94,16 +94,16 @@ const Header = ({
                     : 'hover:scale-102'
                 } disabled:cursor-not-allowed disabled:opacity-50`}
                 style={{
-                  color: selectedMode === mode.key ? theme.text.highlight : theme.text.muted
+                  color: selectedMode === mode.key ? currentTheme.text.highlight : currentTheme.text.muted
                 }}
                 onMouseEnter={(e) => {
                   if (!isActive && selectedMode !== mode.key) {
-                    e.target.style.color = theme.text.secondary;
+                    e.target.style.color = currentTheme.text.secondary;
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (!isActive && selectedMode !== mode.key) {
-                    e.target.style.color = theme.text.muted;
+                    e.target.style.color = currentTheme.text.muted;
                   }
                 }}
               >
@@ -127,19 +127,19 @@ const Header = ({
               } disabled:cursor-not-allowed disabled:opacity-50`}
               style={{
                 animationDelay: `${index * 0.05}s`,
-                backgroundColor: selectedPreset === preset && !customValue ? theme.buttons.primaryBg : 'transparent',
-                color: selectedPreset === preset && !customValue ? theme.buttons.primaryText : theme.text.muted,
-                border: selectedPreset === preset && !customValue ? `1px solid ${theme.borders.highlight}` : '1px solid transparent'
+                backgroundColor: selectedPreset === preset && !customValue ? currentTheme.buttons.primaryBg : 'transparent',
+                color: selectedPreset === preset && !customValue ? currentTheme.buttons.primaryText : currentTheme.text.muted,
+                border: selectedPreset === preset && !customValue ? `1px solid ${currentTheme.borders.highlight}` : '1px solid transparent'
               }}
               onMouseEnter={(e) => {
                 if (!isActive && (selectedPreset !== preset || customValue)) {
-                  e.target.style.color = theme.text.secondary;
-                  e.target.style.backgroundColor = theme.backgrounds.card;
+                  e.target.style.color = currentTheme.text.secondary;
+                  e.target.style.backgroundColor = currentTheme.backgrounds.card;
                 }
               }}
               onMouseLeave={(e) => {
                 if (!isActive && (selectedPreset !== preset || customValue)) {
-                  e.target.style.color = theme.text.muted;
+                  e.target.style.color = currentTheme.text.muted;
                   e.target.style.backgroundColor = 'transparent';
                 }
               }}
@@ -158,19 +158,19 @@ const Header = ({
             } disabled:cursor-not-allowed disabled:opacity-50`}
             style={{
               animationDelay: '0.15s',
-              backgroundColor: customValue ? theme.buttons.primaryBg : 'transparent',
-              color: customValue ? theme.buttons.primaryText : theme.text.muted,
-              border: customValue ? `1px solid ${theme.borders.highlight}` : '1px solid transparent'
+              backgroundColor: customValue ? currentTheme.buttons.primaryBg : 'transparent',
+              color: customValue ? currentTheme.buttons.primaryText : currentTheme.text.muted,
+              border: customValue ? `1px solid ${currentTheme.borders.highlight}` : '1px solid transparent'
             }}
             onMouseEnter={(e) => {
               if (!isActive && !customValue) {
-                e.target.style.color = theme.text.secondary;
-                e.target.style.backgroundColor = theme.backgrounds.card;
+                e.target.style.color = currentTheme.text.secondary;
+                e.target.style.backgroundColor = currentTheme.backgrounds.card;
               }
             }}
             onMouseLeave={(e) => {
               if (!isActive && !customValue) {
-                e.target.style.color = theme.text.muted;
+                e.target.style.color = currentTheme.text.muted;
                 e.target.style.backgroundColor = 'transparent';
               }
             }}
@@ -191,9 +191,9 @@ const Header = ({
               placeholder={`Enter ${getCustomLabel()}`}
               className="px-3 py-1 border rounded text-sm focus:outline-none w-32 transition-all duration-200 focus:scale-105"
               style={{
-                backgroundColor: theme.backgrounds.input,
-                borderColor: theme.borders.default,
-                color: theme.text.primary
+                backgroundColor: currentTheme.backgrounds.input,
+                borderColor: currentTheme.borders.default,
+                color: currentTheme.text.primary
               }}
               autoFocus
             />
@@ -201,8 +201,8 @@ const Header = ({
               type="submit"
               className="px-3 py-1 rounded text-sm font-medium transition-all duration-200 hover:scale-105 shadow-lg"
               style={{
-                backgroundColor: theme.buttons.primaryBg,
-                color: theme.buttons.primaryText
+                backgroundColor: currentTheme.buttons.primaryBg,
+                color: currentTheme.buttons.primaryText
               }}
             >
               Set
@@ -212,8 +212,8 @@ const Header = ({
               onClick={() => setShowCustomInput(false)}
               className="px-3 py-1 rounded text-sm transition-all duration-200 hover:scale-105"
               style={{
-                backgroundColor: theme.backgrounds.card,
-                color: theme.text.secondary
+                backgroundColor: currentTheme.backgrounds.card,
+                color: currentTheme.text.secondary
               }}
             >
               Cancel

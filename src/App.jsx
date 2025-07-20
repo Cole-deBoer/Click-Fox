@@ -3,13 +3,14 @@ import Header from './components/Header';
 import ClickArea from './components/ClickArea';
 import Results from './components/Results';
 import { useClickTest } from './hooks/useClickTest';
-import theme from './assets/theme.json';
+import defaultTheme from './assets/theme.json';
 import { ThemeViewer } from './components/ThemeViewer';
 
 function App() {
   const [selectedMode, setSelectedMode] = useState('time');
   const [selectedPreset, setSelectedPreset] = useState(5);
   const [customValue, setCustomValue] = useState(null);
+  const [currentTheme, setCurrentTheme] = useState(defaultTheme);
 
   const targetValue = customValue || selectedPreset;
 
@@ -64,8 +65,12 @@ function App() {
     restart();
   };
 
+  const handleThemeChange = (newTheme) => {
+    setCurrentTheme(newTheme);
+  };
+
   return (
-    <div className="min-h-screen overflow-hidden" style={{backgroundColor: theme.backgrounds.main, color: theme.text.primary}}>
+    <div className="min-h-screen overflow-hidden" style={{backgroundColor: currentTheme.backgrounds.main, color: currentTheme.text.primary}}>
       {/* Subtle background pattern */}
       <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
@@ -84,6 +89,7 @@ function App() {
           onCustomValueChange={handleCustomValueChange}
           onRestart={handleRestart}
           isActive={isActive}
+          currentTheme={currentTheme}
         />
         
         <main className="flex-1 flex flex-col items-center justify-center px-6">
@@ -95,6 +101,7 @@ function App() {
               testDuration={testDuration}
               reactionTimes={reactionTimes}
               onRestart={handleRestart}
+              currentTheme={currentTheme}
             />
           ) : (
             <ClickArea
@@ -109,22 +116,14 @@ function App() {
               reactionState={reactionState}
               reactionTimes={reactionTimes}
               currentRun={currentRun}
+              currentTheme={currentTheme}
             />
           )}
         </main>
 
         <footer className="text-center py-6 text-sm">
-          <div className="flex items-center justify-center gap-4">
-            <span style={{color: theme.text.muted}}>esc</span>
-            <span style={{color: theme.text.muted}}>•</span>
-            <span style={{color: theme.text.muted}}>enter</span>
-            <span style={{color: theme.text.muted}}>•</span>
-            <span style={{color: theme.text.muted}}>restart test</span>
-            <span style={{color: theme.text.muted}}>•</span>
-
-          </div>
           <div className="flex items-center justify-end px-5">
-            <ThemeViewer />
+            <ThemeViewer onThemeChange={handleThemeChange}/>
           </div>
         </footer>
       </div>
