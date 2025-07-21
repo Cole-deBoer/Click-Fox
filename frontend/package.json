@@ -5,17 +5,14 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "start": "node server.js",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
-    "cors": "^2.8.5",
     "dotenv": "^17.2.0",
-    "express": "^5.1.0",
     "lucide-react": "^0.344.0",
-    "nodemon": "^3.1.10",
-    "pinia": "^3.0.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
