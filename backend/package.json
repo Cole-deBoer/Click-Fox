@@ -3,15 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  
   "scripts": {
     "start": "node server.js"
   },
-
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^17.2.0",
     "express": "^5.1.0",
+    "firebase-admin": "^13.4.0",
     "firebase-tools": "^14.11.0",
     "mongodb": "^6.17.0",
     "mysql2": "^3.14.2",

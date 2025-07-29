@@ -1,6 +1,6 @@
 import express from 'express';
 import {MongoClient} from 'mongodb';
-import router from './authRoutes.js'
+import router from './routes/authRoutes.js'
 import cors from 'cors';
 import env from 'dotenv';
 
@@ -21,7 +21,7 @@ async function run() {
     await client.connect();
     console.log("Successfully connected to MongoDB!");
 
-    app.use('/api/auth', router);
+    app.use('/api', router);
     
     app.listen(process.env.PORT, () => {
       console.log(`Server started on port ${process.env.PORT}`);
