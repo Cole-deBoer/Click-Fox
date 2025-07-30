@@ -1,4 +1,4 @@
-# ClickFox
+# Click-Fox
 
 ClickFox is a modern web application for practicing and testing your clicking speed, accuracy, and reaction time. With multiple game modes, a beautiful fox-themed UI, and a fully customizable color system, ClickFox is perfect for anyone looking to improve their mouse skills or just have some fun.
 
