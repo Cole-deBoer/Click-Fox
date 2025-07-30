@@ -1,9 +1,9 @@
 // config/firebase.js
 import admin from 'firebase-admin';
-import serviceAccount from './serviceAccountKey.json' with {type: "json"};
+import {backendConfig} from './serviceAccountKey.js';
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
+  credential: admin.credential.cert(backendConfig),
 });
 
 export const auth = admin.auth();
