@@ -1,15 +1,20 @@
 import express from 'express';
 import {MongoClient} from 'mongodb';
-import router from './routes/authRoutes.js'
 import cors from 'cors';
 import env from 'dotenv';
+
+// Routers
+import authRouter from './routes/authRoutes.js'
+import userRouter from './routes/userRoutes.js'
+
+import {connectToDB} from './database.js' 
 
 env.config();
 const app = express();
 app.use(cors());
 app.use(express.json())
 
-const uri = `mongodb+srv://ADMIN:${encodeURIComponent(process.env.DB_PASSWORD)}@clickfox-dev-cluster.ldxr4nk.mongodb.net/?retryWrites=true&w=majority&appName=clickfox-dev-cluster`;
+const uri = process.env.MONGO_URI;
 
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -21,7 +26,10 @@ async function run() {
     await client.connect();
     console.log("Successfully connected to MongoDB!");
 
-    app.use('/api', router);
+    // Link mongoose to MongoDB
+    await connectToDB();
+    
+    app.use('/api', authRouter, userRouter);
     
     app.listen(process.env.PORT, () => {
       console.log(`Server started on port ${process.env.PORT}`);
