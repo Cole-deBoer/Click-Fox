@@ -12,8 +12,7 @@ const ClickArea = ({
   targetValue,
   reactionState,
   reactionTimes,
-  currentRun,
-  currentTheme
+  currentRun
 }) => {
   const [showFlash, setShowFlash] = useState(false);
 
@@ -41,9 +40,9 @@ const ClickArea = ({
   const getClickAreaContent = () => {
     if (!isStarted) {
       const icons = {
-        time: <MousePointer2 className="w-12 h-12 mx-auto mb-4 animate-bounce" style={{color: currentTheme.text.highlight}} />,
-        click: <Target className="w-12 h-12 mx-auto mb-4 animate-bounce" style={{color: currentTheme.text.highlight}} />,
-        speed: <Zap className="w-12 h-12 mx-auto mb-4 animate-bounce" style={{color: currentTheme.text.highlight}} />
+        time: <MousePointer2 className="w-12 h-12 mx-auto mb-4 animate-bounce" style={{color: '#ffffff'}} />,
+        click: <Target className="w-12 h-12 mx-auto mb-4 animate-bounce" style={{color: '#ffffff'}} />,
+        speed: <Zap className="w-12 h-12 mx-auto mb-4 animate-bounce" style={{color: '#ffffff'}} />
       };
 
       const descriptions = {
@@ -55,8 +54,8 @@ const ClickArea = ({
       return (
         <div className="text-center animate-pulse">
           {icons[gameMode]}
-          <p className="text-xl mb-2" style={{color: currentTheme.text.secondary}}>click to start</p>
-          <p className="text-sm" style={{color: currentTheme.text.muted}}>{descriptions[gameMode]}</p>
+          <p className="text-xl mb-2" style={{color: '#cccccc'}}>click to start</p>
+          <p className="text-sm" style={{color: '#888888'}}>{descriptions[gameMode]}</p>
         </div>
       );
     }
@@ -64,13 +63,13 @@ const ClickArea = ({
     if (gameMode === 'time' && isActive) {
       return (
         <div className="text-center">
-          <div className="text-8xl font-light mb-6 animate-pulse" style={{color: currentTheme.text.highlight}}>
+          <div className="text-8xl font-light mb-6 animate-pulse" style={{color: '#ffffff'}}>
             {timeLeft}
           </div>
-          <div className="text-4xl font-light mb-2 transition-all duration-100" style={{color: currentTheme.text.primary}}>
+          <div className="text-4xl font-light mb-2 transition-all duration-100" style={{color: '#ffffff'}}>
             {clickCount}
           </div>
-          <p className="text-sm" style={{color: currentTheme.text.muted}}>clicks</p>
+          <p className="text-sm" style={{color: '#888888'}}>clicks</p>
         </div>
       );
     }
@@ -78,13 +77,13 @@ const ClickArea = ({
     if (gameMode === 'click' && isActive) {
       return (
         <div className="text-center">
-          <div className="text-8xl font-light mb-6" style={{color: currentTheme.text.highlight}}>
+          <div className="text-8xl font-light mb-6" style={{color: '#ffffff'}}>
             {targetValue - clickCount}
           </div>
-          <div className="text-2xl font-light mb-2" style={{color: currentTheme.text.secondary}}>
+          <div className="text-2xl font-light mb-2" style={{color: '#cccccc'}}>
             {clickCount} / {targetValue}
           </div>
-          <p className="text-sm" style={{color: currentTheme.text.muted}}>clicks remaining</p>
+          <p className="text-sm" style={{color: '#888888'}}>clicks remaining</p>
         </div>
       );
     }
@@ -93,10 +92,10 @@ const ClickArea = ({
       if (reactionState === 'waiting') {
         return (
           <div className="text-center">
-            <div className="text-4xl font-light mb-4" style={{color: currentTheme.text.secondary}}>
+            <div className="text-4xl font-light mb-4" style={{color: '#cccccc'}}>
               Wait for it...
             </div>
-            <div className="text-lg" style={{color: currentTheme.text.muted}}>
+            <div className="text-lg" style={{color: '#888888'}}>
               Run {currentRun} of {targetValue}
             </div>
           </div>
@@ -106,10 +105,10 @@ const ClickArea = ({
       if (reactionState === 'ready') {
         return (
           <div className="text-center animate-pulse">
-            <div className="text-6xl font-light mb-4" style={{color: currentTheme.text.highlight}}>
+            <div className="text-6xl font-light mb-4" style={{color: '#ffffff'}}>
               CLICK NOW!
             </div>
-            <div className="text-lg" style={{color: currentTheme.text.muted}}>
+            <div className="text-lg" style={{color: '#888888'}}>
               Run {currentRun} of {targetValue}
             </div>
           </div>
@@ -120,14 +119,14 @@ const ClickArea = ({
         const lastTime = reactionTimes[reactionTimes.length - 1];
         return (
           <div className="text-center">
-            <div className="text-4xl font-light mb-4" style={{color: currentTheme.text.highlight}}>
+            <div className="text-4xl font-light mb-4" style={{color: '#ffffff'}}>
               {lastTime}ms
             </div>
-            <div className="text-lg" style={{color: currentTheme.text.muted}}>
+            <div className="text-lg" style={{color: '#888888'}}>
               Run {currentRun} of {targetValue}
             </div>
             {currentRun < targetValue && (
-              <div className="text-sm mt-2" style={{color: currentTheme.text.muted}}>
+              <div className="text-sm mt-2" style={{color: '#888888'}}>
                 Next round starting...
               </div>
             )}
@@ -171,29 +170,29 @@ const ClickArea = ({
   const getClickAreaInlineStyle = () => {
     if (gameMode === 'speed' && reactionState === 'ready') {
       return {
-        borderColor: currentTheme.text.highlight,
-        backgroundColor: currentTheme.text.highlight + '20',
-        boxShadow: `0 10px 25px ${currentTheme.shadows.main}`
+        borderColor: '#ffffff',
+        backgroundColor: '#ffffff' + '20',
+        boxShadow: `0 10px 25px rgba(255, 255, 255, 0.1)`
       };
     }
 
     if (isActive) {
       return {
-        borderColor: currentTheme.text.highlight + '50',
-        backgroundColor: currentTheme.text.highlight + '05'
+        borderColor: '#ffffff' + '50',
+        backgroundColor: '#ffffff' + '05'
       };
     }
 
     if (!isStarted) {
       return {
-        borderColor: currentTheme.borders.default,
-        backgroundColor: currentTheme.backgrounds.card + '30'
+        borderColor: '#333333',
+        backgroundColor: '#111111' + '30'
       };
     }
 
     return {
-      borderColor: currentTheme.borders.default,
-      backgroundColor: currentTheme.backgrounds.card + '20'
+      borderColor: '#333333',
+      backgroundColor: '#111111' + '20'
     };
   };
 
@@ -202,12 +201,12 @@ const ClickArea = ({
       {/* Progress Bar */}
       {isStarted && (
         <div className="w-full max-w-4xl mb-8">
-          <div className="h-1 rounded-full overflow-hidden" style={{backgroundColor: currentTheme.backgrounds.card}}>
+          <div className="h-1 rounded-full overflow-hidden" style={{backgroundColor: '#111111'}}>
             <div 
               className="h-full transition-all duration-300 ease-out"
               style={{ 
                 width: `${getProgress()}%`,
-                backgroundColor: currentTheme.text.highlight
+                backgroundColor: '#ffffff'
               }}
             />
           </div>
@@ -223,15 +222,15 @@ const ClickArea = ({
         
         {gameMode === 'time' && (isActive || (isStarted && !isActive)) && (
           <div className="absolute bottom-6 text-center">
-            <div className="text-2xl font-light mb-1" style={{color: currentTheme.text.secondary}}>{getCPS()}</div>
-            <div className="text-xs uppercase tracking-wider" style={{color: currentTheme.text.muted}}>clicks per second</div>
+            <div className="text-2xl font-light mb-1" style={{color: '#cccccc'}}>{getCPS()}</div>
+            <div className="text-xs uppercase tracking-wider" style={{color: '#888888'}}>clicks per second</div>
           </div>
         )}
 
         {/* Click ripple effect */}
         {isActive && gameMode !== 'speed' && (
           <div className="absolute inset-0 rounded-2xl pointer-events-none">
-            <div className="absolute inset-0 rounded-2xl animate-ping opacity-0" style={{backgroundColor: currentTheme.text.highlight + '20'}} />
+            <div className="absolute inset-0 rounded-2xl animate-ping opacity-0" style={{backgroundColor: '#ffffff' + '20'}} />
           </div>
         )}
       </div>
@@ -240,16 +239,16 @@ const ClickArea = ({
       {gameMode === 'time' && isActive && (
         <div className="mt-8 flex gap-8 text-center animate-fade-in">
           <div>
-            <div className="text-2xl font-light" style={{color: currentTheme.text.primary}}>{clickCount}</div>
-            <div className="text-xs uppercase tracking-wider" style={{color: currentTheme.text.muted}}>total</div>
+            <div className="text-2xl font-light" style={{color: '#ffffff'}}>{clickCount}</div>
+            <div className="text-xs uppercase tracking-wider" style={{color: '#888888'}}>total</div>
           </div>
           <div>
-            <div className="text-2xl font-light" style={{color: currentTheme.text.highlight}}>{getCPS()}</div>
-            <div className="text-xs uppercase tracking-wider" style={{color: currentTheme.text.muted}}>cps</div>
+            <div className="text-2xl font-light" style={{color: '#ffffff'}}>{getCPS()}</div>
+            <div className="text-xs uppercase tracking-wider" style={{color: '#888888'}}>cps</div>
           </div>
           <div>
-            <div className="text-2xl font-light" style={{color: currentTheme.text.secondary}}>{timeLeft}s</div>
-            <div className="text-xs uppercase tracking-wider" style={{color: currentTheme.text.muted}}>remaining</div>
+            <div className="text-2xl font-light" style={{color: '#cccccc'}}>{timeLeft}s</div>
+            <div className="text-xs uppercase tracking-wider" style={{color: '#888888'}}>remaining</div>
           </div>
         </div>
       )}
@@ -258,12 +257,12 @@ const ClickArea = ({
       {gameMode === 'click' && isActive && (
         <div className="mt-8 flex gap-8 text-center animate-fade-in">
           <div>
-            <div className="text-2xl font-light" style={{color: currentTheme.text.primary}}>{clickCount}</div>
-            <div className="text-xs uppercase tracking-wider" style={{color: currentTheme.text.muted}}>clicks</div>
+            <div className="text-2xl font-light" style={{color: '#ffffff'}}>{clickCount}</div>
+            <div className="text-xs uppercase tracking-wider" style={{color: '#888888'}}>clicks</div>
           </div>
           <div>
-            <div className="text-2xl font-light" style={{color: currentTheme.text.highlight}}>{targetValue - clickCount}</div>
-            <div className="text-xs uppercase tracking-wider" style={{color: currentTheme.text.muted}}>remaining</div>
+            <div className="text-2xl font-light" style={{color: '#ffffff'}}>{targetValue - clickCount}</div>
+            <div className="text-xs uppercase tracking-wider" style={{color: '#888888'}}>remaining</div>
           </div>
         </div>
       )}
@@ -272,20 +271,20 @@ const ClickArea = ({
       {gameMode === 'speed' && reactionTimes.length > 0 && (
         <div className="mt-8 flex gap-8 text-center animate-fade-in">
           <div>
-            <div className="text-2xl font-light" style={{color: currentTheme.text.primary}}>{reactionTimes.length}</div>
-            <div className="text-xs uppercase tracking-wider" style={{color: currentTheme.text.muted}}>completed</div>
+            <div className="text-2xl font-light" style={{color: '#ffffff'}}>{reactionTimes.length}</div>
+            <div className="text-xs uppercase tracking-wider" style={{color: '#888888'}}>completed</div>
           </div>
           <div>
-            <div className="text-2xl font-light" style={{color: currentTheme.text.highlight}}>
+            <div className="text-2xl font-light" style={{color: '#ffffff'}}>
               {(reactionTimes.reduce((a, b) => a + b, 0) / reactionTimes.length).toFixed(0)}ms
             </div>
-            <div className="text-xs uppercase tracking-wider" style={{color: currentTheme.text.muted}}>avg time</div>
+            <div className="text-xs uppercase tracking-wider" style={{color: '#888888'}}>avg time</div>
           </div>
           <div>
-            <div className="text-2xl font-light" style={{color: currentTheme.text.highlight}}>
+            <div className="text-2xl font-light" style={{color: '#ffffff'}}>
               {Math.min(...reactionTimes)}ms
             </div>
-            <div className="text-xs uppercase tracking-wider" style={{color: currentTheme.text.muted}}>best</div>
+            <div className="text-xs uppercase tracking-wider" style={{color: '#888888'}}>best</div>
           </div>
         </div>
       )}

@@ -3,14 +3,44 @@ import Header from './components/Header';
 import ClickArea from './components/ClickArea';
 import Results from './components/Results';
 import { useClickTest } from './hooks/useClickTest';
-import defaultTheme from './assets/theme.json';
-import { ThemeViewer } from './components/ThemeViewer';
+
+const darkTheme = {
+  "backgrounds": {
+    "main": "#000000",
+    "card": "#111111",
+    "input": "#1a1a1a"
+  },
+  "text": {
+    "primary": "#ffffff",
+    "secondary": "#cccccc",
+    "muted": "#888888",
+    "highlight": "#ffffff"
+  },
+  "borders": {
+    "default": "#333333",
+    "highlight": "#ffffff"
+  },
+  "buttons": {
+    "primaryBg": "#ffffff",
+    "primaryText": "#000000",
+    "secondaryBg": "#1a1a1a",
+    "secondaryText": "#ffffff"
+  },
+  "icons": {
+    "main": "white",
+    "secondary": "black"
+  },
+  "shadows": {
+    "main": "rgba(255, 255, 255, 0.1)"
+  }
+};
 
 function App() {
   const [selectedMode, setSelectedMode] = useState('time');
   const [selectedPreset, setSelectedPreset] = useState(5);
   const [customValue, setCustomValue] = useState(null);
-  const [currentTheme, setCurrentTheme] = useState(defaultTheme);
+  
+  const currentTheme = darkTheme;
 
   const targetValue = customValue || selectedPreset;
 
@@ -65,10 +95,6 @@ function App() {
     restart();
   };
 
-  const handleThemeChange = (newTheme) => {
-    setCurrentTheme(newTheme);
-  };
-
   return (
     <div className="min-h-screen overflow-hidden" style={{backgroundColor: currentTheme.backgrounds.main, color: currentTheme.text.primary}}>
       {/* Subtle background pattern */}
@@ -79,7 +105,7 @@ function App() {
         }}></div>
       </div>
       
-      <div className="relative z-10 flex flex-col min-h-screen">
+      <div className="relative z-10 grid grid-rows-[auto_1fr_auto] min-h-screen">
         <Header
           selectedMode={selectedMode}
           selectedPreset={selectedPreset}
@@ -120,12 +146,7 @@ function App() {
             />
           )}
         </main>
-
-        <footer className="text-center py-6 text-sm">
-          <div className="flex items-center justify-end px-5">
-            <ThemeViewer onThemeChange={handleThemeChange}/>
-          </div>
-        </footer>
+        
       </div>
     </div>
   );

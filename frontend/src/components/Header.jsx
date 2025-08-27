@@ -11,7 +11,6 @@ const Header = ({
   onCustomValueChange,
   onRestart, 
   isActive,
-  currentTheme 
 }) => {
   const [showCustomInput, setShowCustomInput] = useState(false);
 
@@ -45,32 +44,34 @@ const Header = ({
     <header className="w-full max-w-6xl mx-auto px-6 py-6">
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center gap-3">
-          <div className="relative flex items-center gap-2 px-4 py-2 bg-gradient-to-br from-white/20 via-gray-300/30 to-white/20 backdrop-blur-sm rounded-xl border border-white/20 shadow-lg" style={{backgroundColor: currentTheme.backgrounds.card}}>
+          <div className="relative flex items-center gap-2 px-4 py-2 bg-gradient-to-br from-white/20 via-gray-300/30 to-white/20 backdrop-blur-sm rounded-xl border border-white/20 shadow-lg" style={{backgroundColor: '#111111'}}>
             {/* Fox Logo */}
             <img src={foxLogo} alt="Fox Logo" className="w-8 h-8" />
           </div>
-          <h1 className="text-2xl font-light" style={{color: currentTheme.text.primary}}>click fox</h1>
+          <h1 className="text-2xl font-light" style={{color: '#ffffff'}}>click fox</h1>
         </div>
         
-        <button
-          onClick={onRestart}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105"
-          style={{
-            color: currentTheme.text.secondary,
-            backgroundColor: 'transparent'
-          }}
-          onMouseEnter={(e) => {
-            e.target.style.color = currentTheme.text.primary;
-            e.target.style.backgroundColor = currentTheme.backgrounds.card;
-          }}
-          onMouseLeave={(e) => {
-            e.target.style.color = currentTheme.text.secondary;
-            e.target.style.backgroundColor = 'transparent';
-          }}
-        >
-          <RotateCcw className="w-4 h-4" />
-          <span className="text-sm">restart test</span>
-        </button>
+        <div className="flex items-center gap-4">
+          <button
+            onClick={onRestart}
+            className="flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-200 hover:scale-105"
+            style={{
+              color: '#cccccc',
+              backgroundColor: 'transparent'
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.color = '#ffffff';
+              e.target.style.backgroundColor = '#111111';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.color = '#cccccc';
+              e.target.style.backgroundColor = 'transparent';
+            }}
+          >
+            <RotateCcw className="w-4 h-4" />
+            <span className="text-sm">restart test</span>
+          </button>
+        </div>
       </div>
 
       <div className="flex items-center justify-between">
@@ -81,9 +82,9 @@ const Header = ({
               <span className={`text-sm transition-all duration-300 ${
                 selectedMode === mode.key ? 'scale-110' : ''
               }`} style={{
-                color: selectedMode === mode.key ? currentTheme.text.highlight : currentTheme.text.muted
+                color: selectedMode === mode.key ? '#ffffff' : '#888888'
               }}>
-                {mode.key === 'time' ? '@' : mode.key === 'click' ? '#' : '⚡'}
+                {mode.key === 'time' ? '@' : mode.key === 'click' ? '#' : ''}
               </span>
               <button
                 onClick={() => onModeChange(mode.key)}
@@ -94,16 +95,16 @@ const Header = ({
                     : 'hover:scale-102'
                 } disabled:cursor-not-allowed disabled:opacity-50`}
                 style={{
-                  color: selectedMode === mode.key ? currentTheme.text.highlight : currentTheme.text.muted
+                  color: selectedMode === mode.key ? '#ffffff' : '#888888'
                 }}
                 onMouseEnter={(e) => {
                   if (!isActive && selectedMode !== mode.key) {
-                    e.target.style.color = currentTheme.text.secondary;
+                    e.target.style.color = '#cccccc';
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (!isActive && selectedMode !== mode.key) {
-                    e.target.style.color = currentTheme.text.muted;
+                    e.target.style.color = '#888888';
                   }
                 }}
               >
@@ -114,7 +115,7 @@ const Header = ({
         </div>
 
         {/* Game Settings - Right Side with staggered animations */}
-        <div className="flex items-center gap-2 animate-fade-in-right">
+        <div className="flex items-center gap-4">
           {currentMode.presets.map((preset, index) => (
             <button
               key={preset}
@@ -127,19 +128,19 @@ const Header = ({
               } disabled:cursor-not-allowed disabled:opacity-50`}
               style={{
                 animationDelay: `${index * 0.05}s`,
-                backgroundColor: selectedPreset === preset && !customValue ? currentTheme.buttons.primaryBg : 'transparent',
-                color: selectedPreset === preset && !customValue ? currentTheme.buttons.primaryText : currentTheme.text.muted,
-                border: selectedPreset === preset && !customValue ? `1px solid ${currentTheme.borders.highlight}` : '1px solid transparent'
+                backgroundColor: selectedPreset === preset && !customValue ? '#ffffff' : 'transparent',
+                color: selectedPreset === preset && !customValue ? '#000000' : '#888888',
+                border: selectedPreset === preset && !customValue ? `1px solid #ffffff` : '1px solid transparent'
               }}
               onMouseEnter={(e) => {
                 if (!isActive && (selectedPreset !== preset || customValue)) {
-                  e.target.style.color = currentTheme.text.secondary;
-                  e.target.style.backgroundColor = currentTheme.backgrounds.card;
+                  e.target.style.color = '#cccccc';
+                  e.target.style.backgroundColor = '#111111';
                 }
               }}
               onMouseLeave={(e) => {
                 if (!isActive && (selectedPreset !== preset || customValue)) {
-                  e.target.style.color = currentTheme.text.muted;
+                  e.target.style.color = '#888888';
                   e.target.style.backgroundColor = 'transparent';
                 }
               }}
@@ -158,19 +159,19 @@ const Header = ({
             } disabled:cursor-not-allowed disabled:opacity-50`}
             style={{
               animationDelay: '0.15s',
-              backgroundColor: customValue ? currentTheme.buttons.primaryBg : 'transparent',
-              color: customValue ? currentTheme.buttons.primaryText : currentTheme.text.muted,
-              border: customValue ? `1px solid ${currentTheme.borders.highlight}` : '1px solid transparent'
+              backgroundColor: customValue ? '#ffffff' : 'transparent',
+              color: customValue ? '#000000' : '#888888',
+              border: customValue ? `1px solid #ffffff` : '1px solid transparent'
             }}
             onMouseEnter={(e) => {
               if (!isActive && !customValue) {
-                e.target.style.color = currentTheme.text.secondary;
-                e.target.style.backgroundColor = currentTheme.backgrounds.card;
+                e.target.style.color = '#cccccc';
+                e.target.style.backgroundColor = '#111111';
               }
             }}
             onMouseLeave={(e) => {
               if (!isActive && !customValue) {
-                e.target.style.color = currentTheme.text.muted;
+                e.target.style.color = '#888888';
                 e.target.style.backgroundColor = 'transparent';
               }
             }}
@@ -191,9 +192,9 @@ const Header = ({
               placeholder={`Enter ${getCustomLabel()}`}
               className="px-3 py-1 border rounded text-sm focus:outline-none w-32 transition-all duration-200 focus:scale-105"
               style={{
-                backgroundColor: currentTheme.backgrounds.input,
-                borderColor: currentTheme.borders.default,
-                color: currentTheme.text.primary
+                backgroundColor: '#1a1a1a',
+                borderColor: '#333333',
+                color: '#ffffff'
               }}
               autoFocus
             />
@@ -201,8 +202,8 @@ const Header = ({
               type="submit"
               className="px-3 py-1 rounded text-sm font-medium transition-all duration-200 hover:scale-105 shadow-lg"
               style={{
-                backgroundColor: currentTheme.buttons.primaryBg,
-                color: currentTheme.buttons.primaryText
+                backgroundColor: '#ffffff',
+                color: '#000000'
               }}
             >
               Set
@@ -212,8 +213,8 @@ const Header = ({
               onClick={() => setShowCustomInput(false)}
               className="px-3 py-1 rounded text-sm transition-all duration-200 hover:scale-105"
               style={{
-                backgroundColor: currentTheme.backgrounds.card,
-                color: currentTheme.text.secondary
+                backgroundColor: '#111111',
+                color: '#cccccc'
               }}
             >
               Cancel
