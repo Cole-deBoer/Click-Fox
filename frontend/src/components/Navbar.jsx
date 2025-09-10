@@ -9,7 +9,7 @@ const Elements = [
 
 function Navbar() {
     return (
-        <div className="w-auto h-12 mx-8 mt-8">
+        <div className="w-auto max-w-7xl h-12 mx-auto mt-8">
             <div className="w-auto h-auto flex justify-between">
                 {/* Left Justified Items*/}
                 <div className="p-0 flex gap-0 text-center">
@@ -23,7 +23,7 @@ function Navbar() {
                 </div>
 
                 {/* Profile Element (Right Aligned*/}
-                <div className="">
+                <div className="mx-2">
                     <Button content={
                         <b className="font-mono text-xl">
                             Profile

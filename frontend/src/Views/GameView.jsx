@@ -6,10 +6,14 @@ import ClickArea from "../components/ClickArea";
 function GameView() {
     return (
         <>
+        <div className="">
             <Navbar></Navbar>
             <GameModesBar></GameModesBar>
+        </div>
+
             <ClickArea></ClickArea>
         </>
+
     );
 }
 

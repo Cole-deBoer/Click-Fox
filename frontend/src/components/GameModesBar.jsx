@@ -55,40 +55,55 @@ function GameModesBar() {
     })
 
     return (
-        <div className={`${HasSettings() > 0 ? 'w-5/6' : 'w-2/3'}
-                        h-auto mx-auto p-2 flex rounded-lg bg-gray-200 transition-all duration-300`}>
-
-            {/* Game Modes */}
-            <div className="w-full p-0 gap-32 flex justify-center ">
-                {GameModes.map((mode, key) => (
-                    <div key={key} onClick={() => {
-                        // sets the game mode to the key of the clicked element
-                        setGameMode(key)
-                    }}>
-                        <Button highlighted={key == gameMode} content={
-                            <b>{mode.Logo} {mode.Title}</b>
-                        }/>
-                    </div>
-                ))}
-            </div>
-
-            {/* Border */}
-            <div className={`${HasSettings() > 0 ? 'w-1 p-0 rounded-sm bg-gray-500' : 'hidden'}`}/>
+        <>
+            {  innerWidth > 1200 
             
-            {/* Game Settings */}
-            <div className={`${ HasSettings() > 0 ? ' w-max mx-16 gap-16 p-0 flex justify-evenly' : 'hidden'}`}>
-                {GameModes[gameMode].Settings.map((setting, key) => (
-                    <div key={key} onClick={() => {
-                        // sets the game mode to the key of the clicked element
-                        setGameSetting(key)
-                    }}>
-                        <Button highlighted={key == gameSetting} content={
-                            <b>{setting}</b>
-                        }/>
+            ? 
+                <div className={`${HasSettings() > 0 ? 'w-5/6' : 'w-2/3'}
+                                h-auto max-w-6xl mx-auto p-2 flex rounded-lg bg-gray-200 transition-all duration-300`}>
+
+                    {/* Game Modes */}
+                    <div className="w-full p-0 gap-32 flex justify-center ">
+                        {GameModes.map((mode, key) => (
+                            <div key={key} onClick={() => {
+                                // sets the game mode to the key of the clicked element
+                                setGameMode(key)
+                            }}>
+                                <Button highlighted={key == gameMode} content={
+                                    <div className="flex">
+                                        <p className="scale-75">{mode.Logo}</p>
+                                        <b>{mode.Title}</b>
+                                    </div>
+                                }/>
+                            </div>
+                        ))}
                     </div>
-                ))}
+
+                    {/* Border */}
+                    <div className={`${HasSettings() > 0 ? 'w-1 p-0 rounded-sm bg-gray-500' : 'hidden'}`}/>
+                    
+                    {/* Game Settings */}
+                    <div className={`${ HasSettings() > 0 ? 'w-max mx-16 gap-16 p-0 flex justify-evenly' : 'hidden'}`}>
+                        {GameModes[gameMode].Settings.map((setting, key) => (
+                            <div key={key} onClick={() => {
+                                // sets the game mode to the key of the clicked element
+                                setGameSetting(key)
+                            }}>
+                                <Button highlighted={key == gameSetting} content={
+                                    <b>{setting}</b>
+                                }/>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            : 
+            <div className="w-max h-max mx-auto  p-4 px-8 bg-gray-200 align-middle rounded-xl">
+                <Button content={
+                    <p>⚙ Test Options</p>
+                }/>
             </div>
-        </div>
+            }
+        </>
     );
 }
 
