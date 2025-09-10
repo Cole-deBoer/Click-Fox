@@ -4,9 +4,9 @@ import GameView from './Views/GameView';
 
 function App() {
   return (
-    <>
+    <div>
       <GameView/>
-    </>
+    </div>
   );
 }
 

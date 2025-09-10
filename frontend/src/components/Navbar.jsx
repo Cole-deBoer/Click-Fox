@@ -3,8 +3,8 @@ import Button from "./Button";
 
 const Elements = [
     "Click-Fox",
-    "Home",
-    "Leaderboard",
+    "🖱",
+    "👑",
 ]
 
 function Navbar() {
