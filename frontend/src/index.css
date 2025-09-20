@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@theme /* defining global CSS variables */
+@theme
  {
     --color-primary: rgb(67, 67, 67);
     --color-secondary: rgb(30, 30, 30);

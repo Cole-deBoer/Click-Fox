@@ -2,9 +2,9 @@ import React from 'react';
 import GameView from './Views/GameView';
 
 
-function App() {
+const App = () => {
   return (
-    <div>
+    <div className='w-full h-screen p-2 bg-zinc-700'>
       <GameView/>
     </div>
   );

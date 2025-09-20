@@ -3,15 +3,16 @@ import Navbar from "../components/Navbar";
 import GameModesBar from "../components/GameModesBar";
 import ClickArea from "../components/ClickArea";
 
-function GameView() {
+const GameView = () => {
     return (
         <>
-        <div className="">
-            <Navbar></Navbar>
-            <GameModesBar></GameModesBar>
-        </div>
-
-            <ClickArea></ClickArea>
+            <div>
+                <Navbar></Navbar>
+                <GameModesBar></GameModesBar>
+            </div>
+            <div className="w-full">
+                <ClickArea></ClickArea>
+            </div>
         </>
 
     );
