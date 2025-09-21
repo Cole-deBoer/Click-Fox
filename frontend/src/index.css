@@ -3,10 +3,11 @@
 @tailwind utilities;
 
 @theme
- {
+{
     --color-primary: rgb(67, 67, 67);
     --color-secondary: rgb(30, 30, 30);
     --color-highlight-100:  rgb(34, 6, 100);
+    --color-highlight-200:  rgb(68, 12, 200);
 }
 
 @layer components {

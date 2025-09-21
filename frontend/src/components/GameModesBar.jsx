@@ -1,57 +1,13 @@
 import React, { useState } from "react";
 import Button from "./Button";
+import { GameMode, GameModes, Time } from "../GameModes";
 
-const Time = {
-    Title: "Time",
-    Logo: "🕗",
-    Settings: [
-        1,
-        5,
-        10,
-    ]
-};
-
-const Clicks = {
-    Title: "Clicks",
-    Logo: "🖱",
-    Settings: [
-        5,
-        10,
-        20,
-    ]
-};
-
-const Reaction = {
-    Title: "Reaction",
-    Logo: "⏰",
-    Settings: [
-    ]
-};
-
-const Zen = {
-    Title: "Zen",
-    Logo: "🗻",
-    Settings: [
-    ]
-};
-
-const GameModes = [
-    Time,
-    Clicks,
-    Reaction,
-    Zen
-];
-
-const GameModesBar = () => {
-    // set the first game mode as the selected game mode.
-    const [gameMode, setGameMode] = useState(0);
-
+const GameModesBar = ({gameMode = Time, setGameMode = () => {}, gameSetting = gameMode[0], setGameSetting = () => {}}) => {
     // set the selected setting to the first setting for the selected game mode.
-    const [gameSetting, setGameSetting] = useState(0);
 
     // checks if the selected game mode has settings to display.
     const HasSettings = (() => {
-        return GameModes[gameMode].Settings.length > 0;
+        return gameMode.Settings.length > 0;
     })
 
     return (
@@ -63,9 +19,9 @@ const GameModesBar = () => {
                 {GameModes.map((mode, key) => (
                     <div key={key} onClick={() => {
                         // sets the game mode to the key of the clicked element
-                        setGameMode(key)
+                        setGameMode(GameModes[key])
                     }}>
-                        <Button highlighted={key == gameMode} content={
+                        <Button highlighted={GameModes[key] == gameMode} content={
                             <div className="flex">
                                 <p className="scale-75">{mode.Logo}</p>
                                 <b>{mode.Title}</b>
@@ -80,7 +36,7 @@ const GameModesBar = () => {
             
             {/* Game Settings */}
             <div className={`${ HasSettings() > 0 ? 'w-max mx-16 gap-16 p-0 flex justify-evenly' : 'hidden'}`}>
-                {GameModes[gameMode].Settings.map((setting, key) => (
+                {gameMode.Settings.map((setting, key) => (
                     <div key={key} onClick={() => {
                         // sets the game mode to the key of the clicked element
                         setGameSetting(key)

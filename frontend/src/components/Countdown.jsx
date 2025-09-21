@@ -4,7 +4,7 @@ const Countdown = ({duration, callback}) => {
     const [timeElapsed, setTimeElapsed] = useState(0);
     useEffect(() => {
         // defines the amount of miliseconds between each reload of the browser.
-        const tickRate = 20;
+        const tickRate = 40;
         let elapsed = 0;
         const countdownInterval = setInterval(() => {
             // divide by 1000 to add millisecond to the timeElapsed instead of adding seconds.
