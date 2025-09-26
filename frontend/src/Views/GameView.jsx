@@ -6,7 +6,6 @@ import Countdown from "../components/Countdown"
 import { GameModes } from "../GameModes";
 
 
-
 const GameView = () => {
     const [shouldShowResults, setShouldShowResults] = useState(true);
     const [clickCount, setClickCount] = useState(0);
@@ -15,16 +14,16 @@ const GameView = () => {
 
 
     return (
-        <div>  
+        <div className="h-4/6 scale-75 md:scale-95 xl:scale-100 content-center">  
             {shouldShowResults ?
-            <>
+            <div className="w-full h-full">
                 <Results clickCount={clickCount} 
                     testDuration={gameMode.Settings[gameSetting]} 
                     testType={gameMode.Title}
                     showGameScreen={() => setShouldShowResults(false)}
                     clearClickCount={() => setClickCount(0)}
                 />
-            </> :
+            </div> :
             <>
                 <div>
                     <GameModesBar 
@@ -46,7 +45,6 @@ const GameView = () => {
                 </div>
             </>}
         </div>
-
     );
 }
 

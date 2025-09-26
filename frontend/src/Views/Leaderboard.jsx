@@ -1,9 +1,10 @@
 import React from "react";
+import UnderDevelopment from "../components/UnderDevelopment";
 
 const LeaderboardView = () => {
     return (
         <>
-            Leaderboard View;
+            <UnderDevelopment></UnderDevelopment>
         </>
     );
 }

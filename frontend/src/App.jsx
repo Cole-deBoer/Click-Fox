@@ -13,16 +13,23 @@ import { Route, Routes } from 'react-router-dom';
 
 const App = () => {
   return (
-    <div className='w-full h-screen p-2 text-zinc-400 bg-zinc-700 font-sans justify-center overflow-auto [&::-webkit-scrollbar]:hidden'>
-      <Navbar></Navbar>
-      <Footer></Footer>
+    <div className='w-full h-screen text-zinc-400 bg-zinc-700 font-sans flex flex-col min-h-screen justify-around overflow-auto [&::-webkit-scrollbar]:hidden'>
+      <div className='h-1/6'>
+        <Navbar></Navbar>
+      </div>
 
-      <Routes>
-        <Route path="/" element={<GameView/>}/>
-        <Route path="/profile" element={<ProfileView/>}/>
-        <Route path="/leaderboard" element={<LeaderboardView/>}/>
-        <Route path="/stats" element={<StatsView/>}/>
-      </Routes>
+      <div className='grow h-full'>
+        <Routes>
+          <Route path="/" element={<GameView/>}/>
+          <Route path="/profile" element={<ProfileView/>}/>
+          <Route path="/leaderboard" element={<LeaderboardView/>}/>
+          <Route path="/stats" element={<StatsView/>}/>
+        </Routes>
+      </div>
+
+      <div>
+        <Footer></Footer>      
+      </div>
     </div>
   );
 }
