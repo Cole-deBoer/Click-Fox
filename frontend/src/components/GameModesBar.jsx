@@ -15,7 +15,7 @@ const GameModesBar = ({gameMode = Time, setGameMode = () => {}, gameSetting = ga
                         h-auto max-w-6xl mx-auto p-2 flex rounded-lg bg-gray-200 transition-all duration-300`}>
 
             {/* Game Modes */}
-            <div className="w-full p-0 gap-32 flex justify-center ">
+            <div className="w-full p-0 flex justify-evenly">
                 {GameModes.map((mode, key) => (
                     <div key={key} onClick={() => {
                         // sets the game mode to the key of the clicked element
@@ -32,10 +32,10 @@ const GameModesBar = ({gameMode = Time, setGameMode = () => {}, gameSetting = ga
             </div>
 
             {/* Border */}
-            <div className={`${HasSettings() > 0 ? 'w-1 p-0 rounded-sm bg-gray-500' : 'hidden'}`}/>
+            <div className={`${HasSettings() > 0 ? 'w-px p-0 rounded-sm bg-gray-500' : 'hidden'}`}/>
             
             {/* Game Settings */}
-            <div className={`${ HasSettings() > 0 ? 'w-max mx-16 gap-16 p-0 flex justify-evenly' : 'hidden'}`}>
+            <div className={`${ HasSettings() > 0 ? 'w-1/4 p-0 flex justify-evenly' : 'hidden'}`}>
                 {gameMode.Settings.map((setting, key) => (
                     <div key={key} onClick={() => {
                         // sets the game mode to the key of the clicked element

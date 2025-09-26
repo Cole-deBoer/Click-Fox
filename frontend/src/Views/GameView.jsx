@@ -7,14 +7,14 @@ import { GameModes } from "../GameModes";
 
 
 const GameView = () => {
-    const [shouldShowResults, setShouldShowResults] = useState(true);
+    const [shouldShowResults, setShouldShowResults] = useState(false);
     const [clickCount, setClickCount] = useState(0);
     const [gameMode, setGameMode] = useState(GameModes[0]);
     const [gameSetting, setGameSetting] = useState(0);
 
 
     return (
-        <div className="h-4/6 scale-75 md:scale-95 xl:scale-100 content-center">  
+        <div className="h-4/6 2xl:scale-110 content-center">  
             {shouldShowResults ?
             <div className="w-full h-full">
                 <Results clickCount={clickCount} 

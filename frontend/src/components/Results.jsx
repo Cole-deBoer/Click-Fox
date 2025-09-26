@@ -8,15 +8,15 @@ const Results = ({clickCount = 0, testDuration = 0, testType = GameMode, showGam
             {/* Top Section */}
             <div className="w-full h-full flex justify-center">
                 <div className="flex flex-col min-h-max w-1/6 text-start">
-                    <div className="h-1/2 content-around">
+                    <div className="h-1/2 mb-12 content-around">
                         <div className="h-1/2">
-                            <p className="text-3xl">cps</p>
-                            <b className="text-5xl">{clickCount / testDuration}</b>
+                            <p className="text-3xl 2xl:text-4xl">cps</p>
+                            <b className="text-5xl 2xl:text-6xl">{clickCount / testDuration}</b>
                         </div>
 
                         <div className="h-1/2">
-                            <p className="text-3xl">total clicks</p>
-                            <b className="text-5xl">{clickCount}</b>
+                            <p className="text-3xl 2xl:text-4xl">total clicks</p>
+                            <b className="text-5xl 2xl:text-6xl">{clickCount}</b>
                         </div>
                     </div>
                     <div className="h-1/2 text-xl">
@@ -31,7 +31,7 @@ const Results = ({clickCount = 0, testDuration = 0, testType = GameMode, showGam
                         <p className="">This will be a graph</p>
                     </div>
 
-                    <div className="w-full h-1/2 text-xl text-end">
+                    <div className="w-full h-1/2 mt-12 text-xl text-end">
                         <p>test duration</p>
                         <b>{testDuration}s</b>
                     </div>             
@@ -39,7 +39,7 @@ const Results = ({clickCount = 0, testDuration = 0, testType = GameMode, showGam
             </div>
 
             {/* Actions */}
-            <div className="w-full h-1/6 flex justify-center">
+            <div className="w-full flex justify-center">
                 <Button content={
                     <b onClick={() => {
                         showGameScreen();

@@ -13,7 +13,7 @@ import { Route, Routes } from 'react-router-dom';
 
 const App = () => {
   return (
-    <div className='w-full h-screen text-zinc-400 bg-zinc-700 font-sans flex flex-col min-h-screen justify-around overflow-auto [&::-webkit-scrollbar]:hidden'>
+    <div className='w-full h-screen text-zinc-400 bg-zinc-700 font-sans flex flex-col min-h-screen gap-16 overflow-auto [&::-webkit-scrollbar]:hidden'>
       <div className='h-1/6'>
         <Navbar></Navbar>
       </div>
