@@ -1,19 +1,9 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 
-const ClickArea = ({gameMode = (<></>), setGameFinished = () => {}, clickCount = 0, incrementClickCount = () => {}}) => {
-    // sets the game state to inactive, upon click it gets set to active and 
-    // the webpage will update according to the state of this variable.
-    const [isGameActive, setGameState] = useState(false);
-
-    // Sets a callback to be used once the Countdown has finished.
-    const onCountdownFinished = () => {
-        setGameState(false);
-        setGameFinished(true);
-    };
-
+const ClickArea = ({gameMode = (<></>), clickCount = 0, isGameActive = false, setGameActive = () => {}, incrementClickCount = () => {}}) => {
     return (
         <div className="w-auto max-w-6xl h-auto mx-auto my-12 py-72 flex rounded-xl bg-gray-200 cursor-pointer" onClick={() => {
-                setGameState(true);
+                setGameActive();
                 if(isGameActive == true) {
                     incrementClickCount();
                 } 

@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 // views for routing.
 import Footer from './components/Footer';
 import GameView from './Views/GameView';
-import LeaderboardView from './Views/Leaderboard';
+import LeaderboardView from './Views/LeaderboardView';
 import ProfileView from './Views/ProfileView';
 import StatsView from './Views/StatsView';
 

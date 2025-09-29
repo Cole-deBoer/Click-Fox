@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import Button from "./Button";
-import { GameMode, GameModes, Time } from "../GameModes";
+import { GameModes } from "../GameModes";
 
-const GameModesBar = ({gameMode = Time, setGameMode = () => {}, gameSetting = gameMode[0], setGameSetting = () => {}}) => {
-    // set the selected setting to the first setting for the selected game mode.
+const GameModesBar = ({gameMode = GameModes[0], setGameMode = () => {}, gameSetting = GameModes[0].Settings[0], 
+                    setGameSetting = () => {}, resetGameActive = () => {}}) => {
 
     // checks if the selected game mode has settings to display.
     const HasSettings = (() => {
-        return gameMode.Settings.length > 0;
+        return gameMode.Settings.length > 1;
     })
 
     return (
@@ -20,6 +20,7 @@ const GameModesBar = ({gameMode = Time, setGameMode = () => {}, gameSetting = ga
                     <div key={key} onClick={() => {
                         // sets the game mode to the key of the clicked element
                         setGameMode(GameModes[key])
+                        resetGameActive();
                     }}>
                         <Button highlighted={GameModes[key] == gameMode} content={
                             <div className="flex">
@@ -40,6 +41,7 @@ const GameModesBar = ({gameMode = Time, setGameMode = () => {}, gameSetting = ga
                     <div key={key} onClick={() => {
                         // sets the game mode to the key of the clicked element
                         setGameSetting(key)
+                        resetGameActive();
                     }}>
                         <Button highlighted={key == gameSetting} content={
                             <b>{setting}</b>

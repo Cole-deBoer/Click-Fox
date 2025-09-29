@@ -11,7 +11,7 @@ const Results = ({clickCount = 0, testDuration = 0, testType = GameMode, showGam
                     <div className="h-1/2 mb-12 content-around">
                         <div className="h-1/2">
                             <p className="text-3xl 2xl:text-4xl">cps</p>
-                            <b className="text-5xl 2xl:text-6xl">{clickCount / testDuration}</b>
+                            <b className="text-5xl 2xl:text-6xl">{(clickCount / testDuration).toFixed(2)}</b>
                         </div>
 
                         <div className="h-1/2">
@@ -33,7 +33,7 @@ const Results = ({clickCount = 0, testDuration = 0, testType = GameMode, showGam
 
                     <div className="w-full h-1/2 mt-12 text-xl text-end">
                         <p>test duration</p>
-                        <b>{testDuration}s</b>
+                        <b>{testDuration.toFixed(2)}s</b>
                     </div>             
                 </div>
             </div>

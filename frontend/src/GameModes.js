@@ -28,12 +28,6 @@ export const Clicks = new GameMode (
     ]
 );
 
-export const Reaction = new GameMode (
-    "Reaction",
-    "⏰",
-
-);
-
 export const Zen = new GameMode (
     "Zen",
     "🗻",
@@ -42,7 +36,6 @@ export const Zen = new GameMode (
 export const GameModes = [
     Time,
     Clicks,
-    Reaction,
     Zen
 ];
 

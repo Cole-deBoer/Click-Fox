@@ -8,7 +8,7 @@ const Elements = [
     {Text: "👑", Route: '/leaderboard'},
 ]
 
-function Navbar() {
+const Navbar = () => {
     return (
         <div className="w-5/6 h-12 mx-auto px-8 mt-8">
             <div className="w-auto h-auto flex justify-between">

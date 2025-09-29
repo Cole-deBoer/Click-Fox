@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-const Countdown = ({duration, callback}) => {
+const Countdown = ({duration = 0, callback = () => {}, setGameDuration = () => {}}) => {
     const [timeElapsed, setTimeElapsed] = useState(0);
     useEffect(() => {
         // defines the amount of miliseconds between each reload of the browser.
@@ -13,6 +13,7 @@ const Countdown = ({duration, callback}) => {
 
             if(elapsed >= duration) {
                 clearInterval(countdownInterval);
+                setGameDuration(Math.abs(duration - timeElapsed));
                 callback?.();
             }
         }, tickRate);
