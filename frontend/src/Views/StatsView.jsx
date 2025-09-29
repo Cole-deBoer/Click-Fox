@@ -1,10 +1,9 @@
 import React from "react";
+import UnderDevelopment from "../components/UnderDevelopment";
 
 const StatsView = () => {
     return (
-        <>  
-            Stats
-        </>
+        <UnderDevelopment/>
     );
 }
 

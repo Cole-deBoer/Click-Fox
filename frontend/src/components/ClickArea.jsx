@@ -4,9 +4,7 @@ const ClickArea = ({gameMode = (<></>), clickCount = 0, isGameActive = false, se
     return (
         <div className="w-auto max-w-6xl h-auto mx-auto my-12 py-72 flex rounded-xl bg-gray-200 cursor-pointer" onClick={() => {
                 setGameActive();
-                if(isGameActive == true) {
-                    incrementClickCount();
-                } 
+                incrementClickCount();
             }}>   
 
             <div className="w-full h-0 text-center text-3xl text-gray-400 select-none">

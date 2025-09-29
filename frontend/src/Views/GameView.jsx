@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import GameModesBar from "../components/GameModesBar";
 import ClickArea from "../components/ClickArea";
 import Results from "../components/Results";
@@ -9,11 +9,12 @@ import ClickThreshold from "../components/ClickThreshold";
 
 const GameView = () => {
     const [shouldShowResults, setShouldShowResults] = useState(false);
-    const [clickCount, setClickCount] = useState(1);
+    const [clickCount, setClickCount] = useState(0);
     const [gameMode, setGameMode] = useState(GameModes[0]);
     const [gameSetting, setGameSetting] = useState(0);
     const [gameDuration, setGameDuration] = useState(0);
     const [isGameActive, setGameActive] = useState(false);
+    
 
     const contentToDisplay = () => {
         switch (gameMode) {
@@ -21,8 +22,8 @@ const GameView = () => {
                 return (
                     <Countdown duration={gameMode.Settings[gameSetting]} 
                     callback={() => {
-                        setShouldShowResults(true);
                         setGameActive(false);
+                        setShouldShowResults(true);
                     }}
                     setGameDuration={setGameDuration}/>
                 );
@@ -38,7 +39,6 @@ const GameView = () => {
             case Zen:
                 return (
                     <>
-                        Zen
                     </>
                 );
         };
@@ -52,24 +52,27 @@ const GameView = () => {
                             testDuration={gameDuration} 
                             testType={gameMode.Title}
                             showGameScreen={() => setShouldShowResults(false)}
-                            clearClickCount={() => setClickCount(1)}
+                            clearClickCount={() => setClickCount(0)}
                         />
                     );
-                case Clicks:
-                    return (
-                        
-                        <Results clickCount={clickCount} 
-                            testDuration={gameDuration} 
-                            testType={gameMode.Title}
-                            showGameScreen={() => setShouldShowResults(false)}
-                            clearClickCount={() => setClickCount(1)}
-                        />
-                    );
+            case Clicks:
+                return (
+                    
+                    <Results clickCount={clickCount} 
+                        testDuration={gameDuration} 
+                        testType={gameMode.Title}
+                        showGameScreen={() => setShouldShowResults(false)}
+                        clearClickCount={() => setClickCount(0)}
+                    />
+                );
             case Zen:
                 return (
-                    <>
-                        Zen
-                    </>
+                    <Results clickCount={clickCount} 
+                        testDuration={gameDuration} 
+                        testType={gameMode.Title}
+                        showGameScreen={() => setShouldShowResults(false)}
+                        clearClickCount={() => setClickCount(0)}
+                    />
                 );
         };
     }
@@ -87,7 +90,10 @@ const GameView = () => {
                     setGameMode={(value) => setGameMode(value)} 
                     gameSetting={gameSetting} 
                     setGameSetting={(value) => setGameSetting(value)}
-                    resetGameActive={() => setGameActive(false)}
+                    resetGameActive={() => {
+                        setGameActive(false)
+                        setClickCount(0);
+                    }}
                 />
                 
                 <ClickArea 
