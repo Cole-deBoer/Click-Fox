@@ -44,11 +44,11 @@ const GameView = () => {
             cpsArray[secIndex] += 1;
         });
         console.log(cpsArray);
-        cpsArray.push(cpsArray[cpsArray.length - 1])
+        cpsArray.push((clickCount / gameDuration).toFixed(2))
         setCPSArray(cpsArray);
     }
 
-    useEffect(endGame, [gameDuration]);
+    useEffect(endGame, [gameDuration, clickCount]);
     
     const contentToDisplay = () => {
         switch (gameMode) {

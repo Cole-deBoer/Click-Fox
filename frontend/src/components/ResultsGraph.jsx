@@ -50,7 +50,7 @@ const ResultsGraph = ({testDuration = 0.1, clickCount = 0, clickArray = []}) => 
                     display: true,
                     text: 'Clicks Per Second'
                 },
-                min: 1
+                min: 0
             }
         },
         responsive: true,

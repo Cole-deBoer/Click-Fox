@@ -8,6 +8,7 @@ A modern web application for testing clicking speed and reaction time.
 - **React** - UI framework with functional components and hooks
 - **Tailwind CSS** - Utility-first CSS framework for styling
 - **Vite** - Fast build tool and development server
+- **Chart.js** - Open source and easy to use charting library
 
 ### Backend
 - **Express.js** - Node.js web framework
@@ -22,17 +23,17 @@ A modern web application for testing clicking speed and reaction time.
 ## Project Structure
 
 ```
-├── frontend/                 # React application
+├── frontend/                 
 │   ├── src/
-│   │   ├── components/       # React components
-│   │   ├── hooks/           # Custom React hooks
-│   │   └── assets/          # Static assets
-│   └── firebase.js          # Firebase configuration
-├── backend/                  # Express server
+│   │   ├── Components/       # React components
+│   │   ├── Views/            # Each unique web Page
+│   │   ├── Assets/           # Static assets
+|   ├── firebase.json         # Hosting configuration
+│   └── firebase-config.js    # Firebase configuration
+├── backend/                  
 │   ├── controllers/          # Business logic
-│   ├── routes/              # API endpoints
-│   └── models/              # Data models
-└── firebase.json            # Hosting configuration
+│   ├── routes/               # API endpoints
+│   └── models/               # Data models
 ```
 
 ## Features
