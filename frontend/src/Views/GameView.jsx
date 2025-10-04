@@ -5,6 +5,8 @@ import Results from "../components/Results";
 import Countdown from "../components/Countdown"
 import { GameModes, Time, Clicks, Zen } from "../GameModes";
 import ClickThreshold from "../components/ClickThreshold";
+import { use } from "react";
+
 
 
 const GameView = () => {
@@ -14,8 +16,40 @@ const GameView = () => {
     const [gameSetting, setGameSetting] = useState(0);
     const [gameDuration, setGameDuration] = useState(0);
     const [isGameActive, setGameActive] = useState(false);
-    
 
+    // for generating the dataset to chart for results graph.
+    const [clickTimes, setClickTimes] = useState([]);
+    const [clicksPerSecondArray, setCPSArray] = useState([]);
+    const [startTime, setStartTime] = useState(0.0);
+    
+    const startTest = () => {
+        setClickTimes([]);
+        setCPSArray([]);
+        setStartTime(performance.now());
+    };
+
+    const handleClick = () => {
+        setClickTimes(prev => [...prev, performance.now()]);
+        setClickCount(prevCount => prevCount + 1)
+    };
+
+    const endGame = () => {
+        const seconds = Math.ceil(gameDuration);
+        console.log("game duration: " + seconds);
+        
+        // Bucket into per-second counts
+        let cpsArray = Array(seconds).fill(0);
+        clickTimes.forEach(time => {
+            const secIndex = Math.floor((time - startTime) / 1000);
+            cpsArray[secIndex] += 1;
+        });
+        console.log(cpsArray);
+        cpsArray.push(cpsArray[cpsArray.length - 1])
+        setCPSArray(cpsArray);
+    }
+
+    useEffect(endGame, [gameDuration]);
+    
     const contentToDisplay = () => {
         switch (gameMode) {
             case Time:
@@ -24,6 +58,7 @@ const GameView = () => {
                     callback={() => {
                         setGameActive(false);
                         setShouldShowResults(true);
+                        endGame();
                     }}
                     setGameDuration={setGameDuration}/>
                 );
@@ -33,6 +68,7 @@ const GameView = () => {
                     callback={() => {
                         setGameActive(false);
                         setShouldShowResults(true);
+                        endGame();
                     }}
                     setGameDuration={setGameDuration}/>
                 );
@@ -43,46 +79,17 @@ const GameView = () => {
                 );
         };
     }
-    
-    const resultsToDisplay = () => {
-        switch (gameMode) {
-            case Time:
-                return (
-                        <Results clickCount={clickCount} 
-                            testDuration={gameDuration} 
-                            testType={gameMode.Title}
-                            showGameScreen={() => setShouldShowResults(false)}
-                            clearClickCount={() => setClickCount(0)}
-                        />
-                    );
-            case Clicks:
-                return (
-                    
-                    <Results clickCount={clickCount} 
-                        testDuration={gameDuration} 
-                        testType={gameMode.Title}
-                        showGameScreen={() => setShouldShowResults(false)}
-                        clearClickCount={() => setClickCount(0)}
-                    />
-                );
-            case Zen:
-                return (
-                    <Results clickCount={clickCount} 
-                        testDuration={gameDuration} 
-                        testType={gameMode.Title}
-                        showGameScreen={() => setShouldShowResults(false)}
-                        clearClickCount={() => setClickCount(0)}
-                    />
-                );
-        };
-    }
 
     return (
         <div className="h-4/6 2xl:scale-110 content-center">  
             {shouldShowResults ?
-            <>
-                {resultsToDisplay()}
-            </> 
+            <Results clickCount={clickCount} 
+                testDuration={gameDuration} 
+                testType={gameMode.Title}
+                showGameScreen={() => setShouldShowResults(false)}
+                clearClickCount={() => setClickCount(0)}
+                clickArray={clicksPerSecondArray}
+            />
             :
             <>
                 <GameModesBar 
@@ -100,8 +107,11 @@ const GameView = () => {
                     gameMode={contentToDisplay()}
                     clickCount={clickCount} 
                     isGameActive={isGameActive}
-                    setGameActive={() => setGameActive(true)}
-                    incrementClickCount={() => {setClickCount(prevCount => prevCount + 1)}}       
+                    setGameActive={() => {
+                        setGameActive(true)
+                        startTest();
+                    }}
+                    handleClick={handleClick}
                 />                                        
             </>}
         </div>

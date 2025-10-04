@@ -1,5 +1,5 @@
 import React from "react";
-import UnderDevelopment from "../components/UnderDevelopment";
+import UnderDevelopment from "../Components/UnderDevelopment";
 
 const StatsView = () => {
     return (

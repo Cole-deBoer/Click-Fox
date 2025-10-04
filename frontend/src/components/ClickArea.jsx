@@ -1,13 +1,17 @@
 import React, {useState} from "react";
 
-const ClickArea = ({gameMode = (<></>), clickCount = 0, isGameActive = false, setGameActive = () => {}, incrementClickCount = () => {}}) => {
-    return (
-        <div className="w-auto max-w-6xl h-auto mx-auto my-12 py-72 flex rounded-xl bg-gray-200 cursor-pointer" onClick={() => {
-                setGameActive();
-                incrementClickCount();
-            }}>   
+const ClickArea = ({gameMode = (<></>), clickCount = 0, isGameActive = false, setGameActive = () => {},
+                   handleClick = () => {}}) => {
 
-            <div className="w-full h-0 text-center text-3xl text-gray-400 select-none">
+    return (
+        <div className="w-auto max-w-6xl h-auto mx-auto my-12 py-72 flex rounded-xl bg-zinc-700 cursor-pointer" onClick={() => {
+            if(!isGameActive) {
+                setGameActive();
+            }
+            handleClick();
+        }}>   
+
+            <div className="w-full h-0 text-center text-3xl text-gray-500 select-none">
                 <h1>
                     {isGameActive ? 
                     <>
@@ -21,5 +25,8 @@ const ClickArea = ({gameMode = (<></>), clickCount = 0, isGameActive = false, se
             </div>
         </div>
     )
-}
+};
+
 export default ClickArea;
+
+
