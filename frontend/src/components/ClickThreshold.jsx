@@ -13,8 +13,8 @@ const ClickThreshold = ({currentClicks = 0, clicksNeeded = 0, callback = () => {
     useEffect(() => {
         if(currentClicks === clicksNeeded) 
         {
-            setGameDuration(((new Date().getTime() - timeElapsed) / 1000).toFixed(2));
             callback?.();
+            setGameDuration(((new Date().getTime() - timeElapsed) / 1000).toFixed(2));
         }
     })
     return (

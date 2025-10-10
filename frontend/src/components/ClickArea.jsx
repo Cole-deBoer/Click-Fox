@@ -1,8 +1,6 @@
 import React, {useState} from "react";
 
-const ClickArea = ({gameMode = (<></>), clickCount = 0, isGameActive = false, setGameActive = () => {},
-                   handleClick = () => {}}) => {
-
+const ClickArea = ({gameMode = (<></>), clickCount = 0, isGameActive = false, setGameActive = () => {}, handleClick = () => {}}) => {
     return (
         <div className="w-auto max-w-6xl h-auto mx-auto my-12 py-72 flex rounded-xl bg-zinc-700 cursor-pointer" onClick={() => {
             if(!isGameActive) {

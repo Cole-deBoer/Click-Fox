@@ -23,7 +23,7 @@ ChartJS.register(
   Legend
 );
 
-const ResultsGraph = ({testDuration = 0.1, clickCount = 0, clickArray = []}) => {
+const ResultsGraph = ({testDuration = 0.1, clickArray = []}) => {
     const data = {
         labels: getLengthOfTest(testDuration),
         datasets: [

@@ -33,9 +33,8 @@ const GameView = () => {
         setClickCount(prevCount => prevCount + 1)
     };
 
-    const endGame = () => {
+    useEffect(() => {
         const seconds = Math.ceil(gameDuration);
-        console.log("game duration: " + seconds);
         
         // Bucket into per-second counts
         let cpsArray = Array(seconds).fill(0);
@@ -43,12 +42,9 @@ const GameView = () => {
             const secIndex = Math.floor((time - startTime) / 1000);
             cpsArray[secIndex] += 1;
         });
-        console.log(cpsArray);
         cpsArray.push((clickCount / gameDuration).toFixed(2))
         setCPSArray(cpsArray);
-    }
-
-    useEffect(endGame, [gameDuration, clickCount]);
+    }, [isGameActive]);
     
     const contentToDisplay = () => {
         switch (gameMode) {
@@ -58,7 +54,6 @@ const GameView = () => {
                     callback={() => {
                         setGameActive(false);
                         setShouldShowResults(true);
-                        endGame();
                     }}
                     setGameDuration={setGameDuration}/>
                 );
@@ -68,7 +63,6 @@ const GameView = () => {
                     callback={() => {
                         setGameActive(false);
                         setShouldShowResults(true);
-                        endGame();
                     }}
                     setGameDuration={setGameDuration}/>
                 );

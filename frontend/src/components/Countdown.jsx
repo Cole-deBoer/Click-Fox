@@ -12,13 +12,13 @@ const Countdown = ({duration = 0, callback = () => {}, setGameDuration = () => {
             setTimeElapsed(elapsed);
 
             if(elapsed >= duration) {
+                callback?.();
                 clearInterval(countdownInterval);
                 setGameDuration(Math.abs(duration - timeElapsed));
-                callback?.();
             }
         }, tickRate);
-
-
+        
+        
         // this is to handle unmounting, this acts to clean up the side effects of this function.
         // this avoids duplicate calls to the callback();
         return () => {

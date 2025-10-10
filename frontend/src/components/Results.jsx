@@ -13,7 +13,7 @@ const Results = ({clickCount = 0, testDuration = 0.1, testType = GameMode,
             <div className="grow w-full h-2/3 flex justify-center">
                 <div className="flex flex-col w-1/6 text-start">
                     {/* cps text and value & test type and value*/}
-                    <div className="h-full content-center">
+                    <div className="h-full content-center select-none">
                         <div className="h-1/2">
                             <p className="text-4xl 2xl:text-5xl text-zinc-500">cps</p>
                             <b className="text-6xl 2xl:text-7xl">{(clickCount / testDuration).toFixed(2)}</b>
@@ -28,11 +28,11 @@ const Results = ({clickCount = 0, testDuration = 0.1, testType = GameMode,
 
                 {/* Graph View */}
                 <div className="w-2/3 h-5/6">    
-                    <ResultsGraph testDuration={testDuration} clickCount={clickCount} clickArray={clickArray}/>
+                    <ResultsGraph testDuration={testDuration} clickArray={clickArray}/>
                 </div>
             </div>
 
-            <div className="flex mb-6 justify-around">
+            <div className="flex mb-6 justify-around select-none">
                 <div className="w-1/3 h-1/2 text-xl 2xl:text-2xl">
                     <p className="text-zinc-500">test type</p>
                     <b>{testType}</b>
