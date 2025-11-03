@@ -1,11 +1,16 @@
 import React from "react";
-import GitHubLogo from "../Assets/github-logo.png"
+import Button from "./Button";
+import GitHubLogo from "../Assets/github.svg";
 
 const Footer = () => {
     return (
-        <div className="w-full bottom-0 left-0 right-0 flex justify-center space-x-6 pb-2 cursor-pointer select-none">
-            <a className="flex text-sm"href="https://github.com/Cole-deBoer/Click-Fox"><img src={GitHubLogo}/>github</a>            
-        </div>
+        <Button content={
+            <div className="w-full flex justify-center space-x-6 pb-2 cursor-pointer select-none">
+                <a className="flex text-sm"href="https://github.com/Cole-deBoer/Click-Fox">
+                    <img className="scale-75" src={GitHubLogo}/>github
+                </a>            
+            </div>
+        }/>
     );
 } 
 

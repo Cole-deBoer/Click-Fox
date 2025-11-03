@@ -5,7 +5,6 @@ import Results from "../components/Results";
 import Countdown from "../components/Countdown"
 import { GameModes, Time, Clicks, Zen } from "../GameModes";
 import ClickThreshold from "../components/ClickThreshold";
-import { use } from "react";
 
 
 

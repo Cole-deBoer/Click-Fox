@@ -2,7 +2,7 @@ import React from "react";
 import { GameMode } from "../GameModes";
 import Button from "./Button";
 import ResultsGraph from "./ResultsGraph";
-import continueIcon from "../Assets/continue-icon.png"
+import continueIcon from "../Assets/chevron-right.svg"
 
 
 const Results = ({clickCount = 0, testDuration = 0.1, testType = GameMode,
@@ -46,14 +46,16 @@ const Results = ({clickCount = 0, testDuration = 0.1, testType = GameMode,
 
             {/* Actions */}
             <div className="w-2/5 sm:w-1/2 md:w-1/3 mx-auto flex justify-center">
-                <Button content={
-                    <b onClick={() => {
-                        showGameScreen();
-                        clearClickCount();
-                    }}>
-                        <img width="25" src={continueIcon} alt="continue"/>
-                    </b>
-                } />
+                <div className="w-max">
+                    <Button content={
+                        <b onClick={() => {
+                            showGameScreen();
+                            clearClickCount();
+                        }}>
+                            <img src={continueIcon} alt="continue"/>
+                        </b>
+                    } />
+                </div>
             </div>
         </div>
     )

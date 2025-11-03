@@ -2,24 +2,28 @@ import React from "react";
 import Button from "./Button";
 import {Link } from "react-router-dom";
 
+// svg images
+import crown from "../Assets/crown.svg"
+import mouse from "../Assets/mouse.svg"
+
 const Elements = [
-    {Text: "Click-Fox", Route: '/'},
-    {Text: "🖱", Route: '/'},
-    {Text: "👑", Route: '/leaderboard'},
+    {Display: <strong className='text-md md:text-2xl'>Click-Fox</strong>, Route: '/'},
+    {Display: <img className='h-1/2 md:h-2/3 scale-75 md:scale-90' src={mouse} alt="click logo" />, Route: '/'},
+    {Display: <img className='h-1/2 md:h-2/3 scale-75 md:scale-90' src={crown} alt="leaderboard" />, Route: '/leaderboard'},
 ]
 
 const Navbar = () => {
     return (
-        <div className="w-full md:w-5/6 6 h-12 mx-auto mt-8 md:mt-12 ">
-            <div className="w-auto h-auto flex justify-between">
+        <div className="w-full md:w-5/6 h-12 mx-auto mt-8 md:mt-12">
+            <div className="h-full flex justify-between md:scale-100">
                 {/* Left Justified Items*/}
-                <nav className="p-0 mx-4 flex gap-4 md:gap-14 text-center">
+                <nav className="mx-4 flex gap-4 md:gap-6">
                     {Elements.map((element, key) => (
                         <Link key={key} to={element.Route}>
                             <Button content={
-                                <b className="text-md md:text-2xl">
-                                    {element.Text}
-                                </b>
+                                <>
+                                    {element.Display}
+                                </>
                             }/>
                         </Link>
                     ))}

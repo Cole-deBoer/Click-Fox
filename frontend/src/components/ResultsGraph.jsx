@@ -59,6 +59,7 @@ const ResultsGraph = ({testDuration = 0.1, clickArray = []}) => {
         maintainAspectRatio: false,
     };
 
+    options.animation = false;
     return <Line data={data} options={options}/>
 }
 
