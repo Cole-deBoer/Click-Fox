@@ -11,8 +11,7 @@ const GameModesBar = ({gameMode = GameModes[0], setGameMode = () => {}, gameSett
     })
 
     return (
-        <div className={`${HasSettings() > 0 ? 'w-full md:w-5/6' : 'w-full md:2/3'}
-                        h-auto max-w-6xl mx-auto p-2 flex rounded-lg bg-zinc-700 transition-all duration-300 text-lg `}>
+        <div className="w-full md:w-9/12 max-w-5xl h-auto mx-auto p-2 flex rounded-lg bg-zinc-700 transition-all duration-300 text-lg">
 
             {/* Game Modes */}
             <div className="w-full flex justify-evenly">
