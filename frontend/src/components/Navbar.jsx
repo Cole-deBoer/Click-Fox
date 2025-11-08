@@ -1,6 +1,7 @@
 import React from "react";
 import Button from "./Button";
-import {Link } from "react-router-dom";
+import {Link, useNavigate } from "react-router-dom";
+import { AuthContext } from '../Context/AuthContext';
 
 // svg images
 import crown from "../Assets/crown.svg"
@@ -13,6 +14,17 @@ const Elements = [
 ]
 
 const Navbar = () => {
+    const { isUserSignedIn } = React.useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleProfileClick = () => {
+        if (isUserSignedIn) {
+            navigate('/profile');
+        } else {
+            navigate('/signin');
+        }
+    };
+
     return (
         <div className="w-full md:w-5/6 h-12 mx-auto mt-8 md:mt-12">
             <div className="h-full flex justify-between md:scale-100">
@@ -31,13 +43,13 @@ const Navbar = () => {
 
                 {/* Profile Element (Right Aligned*/}
                 <nav className="mx-2">
-                    <Link to="/profile">
+                    <div onClick={handleProfileClick}>
                         <Button content={
                             <b className="font-mono text-md md:text-2xl">
                                 Profile
                             </b>
                         }/>
-                    </Link>
+                    </div>
                 </nav>
             </div>
         </div>
