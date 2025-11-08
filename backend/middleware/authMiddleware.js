@@ -1,4 +1,4 @@
-import {auth} from '../firebase.js'
+import {auth} from '../firebase-config.js'
 
 // Function for verifying the token of a user. Ensure that the passed token is the Firebase token.
 // method may not work properly if passed the GoogleAuthProvider token or the GithubAuthProvider token.

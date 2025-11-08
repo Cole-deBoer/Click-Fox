@@ -6,6 +6,7 @@ import env from 'dotenv';
 // Routers
 import authRouter from './routes/authRoutes.js'
 import userRouter from './routes/userRoutes.js'
+import resultsRouter from './routes/resultsRoutes.js';
 
 import {connectToDB} from './database.js' 
 
@@ -29,7 +30,7 @@ async function run() {
     // Link mongoose to MongoDB
     await connectToDB();
     
-    app.use('/api', authRouter, userRouter);
+    app.use('/api', authRouter, userRouter, resultsRouter);
     
     app.listen(process.env.PORT, () => {
       console.log(`Server started on port ${process.env.PORT}`);

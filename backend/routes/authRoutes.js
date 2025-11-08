@@ -4,7 +4,7 @@ import {verifyToken} from '../middleware/authMiddleware.js'
 
 const router = express.Router();
 
-router.get('/auth/ping', verifyToken, ping);
+router.get('/auth/ping', ping);
 
 
 export default router;
