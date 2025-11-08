@@ -2,11 +2,75 @@ import React from "react";
 import { GameMode } from "../GameModes";
 import Button from "./Button";
 import ResultsGraph from "./ResultsGraph";
-import continueIcon from "../Assets/chevron-right.svg"
+import continueIcon from "../Assets/chevron-right.svg";
+import { useEffect } from "react";
 
 
-const Results = ({clickCount = 0, testDuration = 0.1, testType = GameMode,
-                 showGameScreen = () => {}, clearClickCount = () => {}, clickArray = []}) => {
+const Results = ({clickCount = 0, testDuration = 0.1, testType = GameMode.title,
+                 showGameScreen = () => {}, clearClickCount = () => {}, clickArray = [], 
+                  username = 'UserOne'}) => {
+
+    useEffect(() => {
+        const postResults = async () => {
+            let statName = '';
+            let statValue = (clickCount / testDuration).toFixed(2);
+
+            
+            if (testType == "Time") {
+                switch (testDuration) {
+                    case 1:
+                        statName = "maxCPSOneSecond";
+                        break;
+                    case 5: 
+                        statName = "maxCPSFiveSeconds";
+                        break;
+                    case 10:
+                        statName = "maxCPSTenSeconds";
+                        break;
+                    default:
+                        console.warn("game duration is invalid");
+                }
+            }
+            if (testType == "Clicks") {
+                switch (clickCount) {
+                    case 5:
+                        statName = "maxCPSFiveClicks";
+                        break;
+                    case 10: 
+                        statName = "maxCPSTenClicks";
+                        break;
+                    default:
+                        console.warn(`game duration is invalid game duration: ${clickCount}`)
+                }
+            }
+
+            if (!statName) {
+                console.warn("Could not determine statName for current game mode and duration.");
+                return;
+            }
+
+            const results = {
+                username: username,
+                [statName]: parseFloat(statValue)
+            }
+
+            try {
+                const response = await fetch('http://localhost:3000/api/results', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({results})
+                });
+
+                const data = await response.json();
+            } catch (error) {
+                console.error('Error sending results:', error);
+            }
+        }
+        postResults();
+    }, [username, testType, testDuration, clickCount]);
+
     return (
         <div className="w-full 2xl:w-5/6 mx-auto p-4 flex flex-col items-center justify-center gap-8">
             {/* Top Section */}
@@ -41,7 +105,7 @@ const Results = ({clickCount = 0, testDuration = 0.1, testType = GameMode,
                 <div className="w-full sm:w-1/3 2xl:text-center sm:text-end text-lg sm:text-xl">
                     <p className="text-zinc-500">test duration</p>
                     <b>{testDuration}s</b>
-                </div>             
+                </div>
             </div>
 
             {/* Actions */}

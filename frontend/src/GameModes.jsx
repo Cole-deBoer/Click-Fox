@@ -1,5 +1,5 @@
 import React from 'react';
-import mouse from './Assets/mouse.svg'
+import click from './Assets/click.svg'
 import clock from './Assets/clock.svg'
 import mountain from './Assets/mountain.svg'
 
@@ -24,7 +24,7 @@ export const Time = new GameMode (
 
 export const Clicks = new GameMode (
     "Clicks",
-    <img src={mouse}></img>,
+    <img src={click}></img>,
     [
         5,
         10,
