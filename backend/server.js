@@ -12,8 +12,16 @@ import {connectToDB} from './database.js'
 
 env.config();
 const app = express();
-app.use(cors());
-app.use(express.json())
+
+// Use cors middleware with explicit options
+app.use(cors({
+    origin: 'http://localhost:5173', // Allow requests from your frontend's origin
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true, // Allow sending of cookies and authorization headers
+    allowedHeaders: ['Content-Type', 'Authorization'], // Explicitly allow Content-Type and Authorization
+}));
+
+app.use(express.json()); // To parse JSON bodies
 
 const uri = process.env.MONGO_URI;
 

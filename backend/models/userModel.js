@@ -3,6 +3,8 @@ import mongoose from 'mongoose'
 const userSchema = new mongoose.Schema({
     // Basic User Information
     username: {type: String, required: true, unique: true},
+    email: {type: String, required: true, unique: true},
+    firebaseUid: {type: String, required: true, unique: true},
     testsTaken: {type: Number, required: true, default: 0},
 
     // HighScores

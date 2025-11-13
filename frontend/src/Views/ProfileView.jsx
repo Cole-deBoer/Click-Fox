@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import StatCard from '../Components/StatCard';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import userIcon from '../Assets/user-round.svg'
 
