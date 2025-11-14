@@ -5,6 +5,7 @@ import Results from "../components/Results";
 import Countdown from "../components/Countdown"
 import { GameModes, Time, Clicks, Zen } from "../GameModes";
 import ClickThreshold from "../components/ClickThreshold";
+import { AuthContext } from "../Context/AuthContext";
 
 
 
@@ -21,17 +22,6 @@ const GameView = () => {
     const [clicksPerSecondArray, setCPSArray] = useState([]);
     const [startTime, setStartTime] = useState(0.0);
     
-    const startTest = () => {
-        setClickTimes([]);
-        setCPSArray([]);
-        setStartTime(performance.now());
-    };
-
-    const handleClick = () => {
-        setClickTimes(prev => [...prev, performance.now()]);
-        setClickCount(prevCount => prevCount + 1)
-    };
-
     useEffect(() => {
         const seconds = Math.ceil(gameDuration);
         
@@ -44,6 +34,18 @@ const GameView = () => {
         cpsArray.push((clickCount / gameDuration).toFixed(2))
         setCPSArray(cpsArray);
     }, [isGameActive]);
+
+    
+    const startTest = () => {
+        setClickTimes([]);
+        setCPSArray([]);
+        setStartTime(performance.now());
+    };
+    
+    const handleClick = () => {
+        setClickTimes(prev => [...prev, performance.now()]);
+        setClickCount(prevCount => prevCount + 1)
+    };
     
     const contentToDisplay = () => {
         switch (gameMode) {
@@ -56,32 +58,32 @@ const GameView = () => {
                     }}
                     setGameDuration={setGameDuration}/>
                 );
-            case Clicks:
-                return (
-                    <ClickThreshold currentClicks={clickCount} clicksNeeded={gameMode.Settings[gameSetting]}
-                    callback={() => {
-                        setGameActive(false);
-                        setShouldShowResults(true);
-                    }}
-                    setGameDuration={setGameDuration}/>
-                );
-            case Zen:
-                return (
-                    <>
+                case Clicks:
+                    return (
+                        <ClickThreshold currentClicks={clickCount} clicksNeeded={gameMode.Settings[gameSetting]}
+                        callback={() => {
+                            setGameActive(false);
+                            setShouldShowResults(true);
+                        }}
+                        setGameDuration={setGameDuration}/>
+                    );
+                    case Zen:
+                        return (
+                            <>
                     </>
                 );
-        };
-    }
-
+            };
+        }
+        
     return (
         <div className="h-4/6 2xl:scale-110 content-center">  
             {shouldShowResults ?
             <Results clickCount={clickCount} 
-                testDuration={gameDuration} 
-                testType={gameMode.Title}
-                showGameScreen={() => setShouldShowResults(false)}
-                clearClickCount={() => setClickCount(0)}
-                clickArray={clicksPerSecondArray}
+            testDuration={gameDuration} 
+            testType={gameMode.Title}
+            showGameScreen={() => setShouldShowResults(false)}
+            clearClickCount={() => setClickCount(0)}
+            clickArray={clicksPerSecondArray}
             />
             :
             <>
@@ -94,7 +96,7 @@ const GameView = () => {
                         setGameActive(false)
                         setClickCount(0);
                     }}
-                />
+                    />
                 
                 <ClickArea 
                     gameMode={contentToDisplay()}

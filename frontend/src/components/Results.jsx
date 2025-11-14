@@ -1,14 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { GameMode } from "../GameModes";
 import Button from "./Button";
 import ResultsGraph from "./ResultsGraph";
 import continueIcon from "../Assets/chevron-right.svg";
 import { useEffect } from "react";
+import UpdateUserStats from "../Requests/UpdateUserStats";
+import { AuthContext } from "../Context/AuthContext";
 
 
 const Results = ({clickCount = 0, testDuration = 0.1, testType = GameMode.title,
-                 showGameScreen = () => {}, clearClickCount = () => {}, clickArray = [], 
-                  username = 'UserOne'}) => {
+                 showGameScreen = () => {}, clearClickCount = () => {}, clickArray = []}) => {
+
+    const auth = useContext(AuthContext);
 
     useEffect(() => {
         const postResults = async () => {
@@ -48,28 +51,11 @@ const Results = ({clickCount = 0, testDuration = 0.1, testType = GameMode.title,
                 console.warn("Could not determine statName for current game mode and duration.");
                 return;
             }
-
-            const results = {
-                username: username,
-                [statName]: parseFloat(statValue)
-            }
-
-            try {
-                const response = await fetch('http://localhost:3000/api/results', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({results})
-                });
-
-                const data = await response.json();
-            } catch (error) {
-                console.error('Error sending results:', error);
-            }
+            
+            UpdateUserStats(auth.currentUser.email, statName, statValue, auth.currentUser.accessToken, true);
         }
         postResults();
-    }, [username, testType, testDuration, clickCount]);
+    }, [testType, testDuration, clickCount]);
 
     return (
         <div className="w-full 2xl:w-5/6 mx-auto p-4 flex flex-col items-center justify-center gap-8">

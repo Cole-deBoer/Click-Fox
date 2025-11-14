@@ -4,6 +4,6 @@ import { results } from '../controllers/resultsController.js';
 
 const router = express.Router();
 
-router.post('/results', results);
+router.post('/results', verifyToken, results);
 
 export default router;

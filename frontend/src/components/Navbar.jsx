@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import Button from "./Button";
 import {Link, useNavigate } from "react-router-dom";
 import { AuthContext } from '../Context/AuthContext';
@@ -14,11 +14,11 @@ const Elements = [
 ]
 
 const Navbar = () => {
-    const { isUserSignedIn } = React.useContext(AuthContext);
+    const user = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleProfileClick = () => {
-        if (isUserSignedIn) {
+        if (user != null) {
             navigate('/profile');
         } else {
             navigate('/signin');

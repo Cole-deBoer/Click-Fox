@@ -1,7 +1,6 @@
 import userModel from '../models/userModel.js'
 
 // Function used for creating users in the database.
-// This should be in an Auth proteced endpoint. 
 // This should only be called once per user. 
 export const createUser = async (req, res) => {
     try {

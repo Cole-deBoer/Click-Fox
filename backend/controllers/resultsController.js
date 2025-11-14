@@ -6,18 +6,27 @@ export const results = async (req, res) => {
         const userResults = req.body.results;
         
         if (!userResults) {
+            console.log('404 (no results object was passed)')
             return res.status(400).json({message: "no results object was found within the request body"});
         }
 
-        if(!userResults.username) {
-            return res.status(404).json({message: "no user was found in the results object"});
+        if(!userResults.uid) {
+            return res.status(400).json({message: 'username and email is null. Ensure there is either an email or a username in the request params.'});
         }
-        
-        const user = await userModel.findOne({username: userResults.username}).lean();
+
+        let user = null;
+        user = await userModel.findOne({username: userResults.uid}).lean();
         
         if(!user) {
-            return res.status(404).json({message: "no user corresponds to the passed user in results object"});
+            user = await userModel.findOne({email: userResults.uid}).lean();
+            if(!user) {
+                console.log('404 (no user corresponds to passed user in results object)');
+                return res.status(404).json({message: 'there is no user that corresponds to the provided username or email'});
+            }
         }
+        
+        //increment the amount of tests that have been taken by the user.
+        await userModel.updateOne({_id: user._id}, { $set: {'testsTaken': user.testsTaken + 1}});
 
         const userStats = [
             user.maxCPSOneSecond,
@@ -44,10 +53,9 @@ export const results = async (req, res) => {
         };
 
         if (statsToUpdate.length == 0) {
+            console.log('no data was updated')
             return res.status(200).json({message: 'no data was updated for this user'});
         }
-
-        console.log(statsToUpdate);
 
         const statNames = [
             "maxCPSOneSecond",
@@ -68,7 +76,6 @@ export const results = async (req, res) => {
             console.log(response);
             return res.status(500).json({message: 'Value was not updated'})
         } 
-
         
     } catch (error)
     {
