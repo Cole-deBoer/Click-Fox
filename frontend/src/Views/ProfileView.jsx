@@ -1,9 +1,11 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext, useLayoutEffect } from 'react';
 import StatCard from '../Components/StatCard';
 import userIcon from '../Assets/user-round.svg'
 import getUser from '../Requests/GetUser';
 import { AuthContext } from '../Context/AuthContext';
-import { Navigate, useNavigate } from 'react-router-dom';
+import {getAuth, signOut} from 'firebase/auth'
+import { useNavigate } from 'react-router-dom';
+import Button from '../Components/Button';
 
 const ProfileView = () => {
     const [userData, setUserData] = useState(null);
@@ -12,7 +14,7 @@ const ProfileView = () => {
     const user = useContext(AuthContext);
     const navigate = useNavigate();
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         console.log('fetching data', user);
 
         if(!user.currentUser) {
@@ -27,7 +29,9 @@ const ProfileView = () => {
         };
 
         fetchUserData();
-    }, []);
+    }, [user]);
+
+    const auth = getAuth();
 
     return (
         <div className="w-full h-full text-white flex flex-col md:content-center">
@@ -53,6 +57,19 @@ const ProfileView = () => {
                         <StatCard title="5 Clicks" value={isLoading ? '' : userData?.maxCPSFiveClicks || '-'} isLoading={isLoading} />
                         <StatCard title="10 Clicks" value={isLoading ? '' : userData?.maxCPSTenClicks || '-'} isLoading={isLoading} />
                     </div>
+                </div>
+            </div>
+            {/*Sign out button*/}
+            <div className='w-full h-full  flex justify-center items-center'>
+                <div className='w-max h-max'>
+                    <Button content={
+                        <div className='w-full h-full px-6 py-3 flex rounded-lg bg-zinc-700' onClick={() => {
+                            console.log('logging out');
+                            signOut(auth);
+                        }}>
+                            sign out
+                        </div>
+                    }/>
                 </div>
             </div>
         </div>

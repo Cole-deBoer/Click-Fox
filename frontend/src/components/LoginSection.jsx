@@ -1,14 +1,22 @@
 import React, {useRef} from "react";
 import { useNavigate } from 'react-router-dom';
 import { handleSignIn, handleGoogleSignIn } from '../registration';
+import {sendPasswordResetEmail} from 'firebase/auth'
+import {getAuth} from 'firebase/auth'
+
 
 import CredentialInput from "./CredentialInput";
 import Button from "./Button";
+import Modal from "./Modal";
+import {useState} from "react";
 
 const LoginSection = ({setGoogleAuthUserData = (firebaseUid, email) => {}, setShowUsernameModal = (boolean) => {}}) => {
     const email = useRef(null);  
     const password = useRef(null);
     const navigate = useNavigate();
+
+    const auth = getAuth();
+    const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
 
     return (
         <div className="w-full md:w-1/2 lg:w-1/3 p-8">
@@ -46,12 +54,30 @@ const LoginSection = ({setGoogleAuthUserData = (firebaseUid, email) => {}, setSh
                 </div>
                 <div className="w-full text-xs">
                     <Button content={
-                        <a href="#">
+                        <a href="#" onClick={() => setShowForgotPasswordModal(true)}>
                             forgot password?
                         </a>
                     }/>
                 </div>
             </form>
+            <Modal
+                show={showForgotPasswordModal}
+                onCancel={() => {
+                    setShowForgotPasswordModal(false);
+                }}
+                onSubmit={async (email) => {
+                    try {
+                        await sendPasswordResetEmail(auth, email);
+                        setShowForgotPasswordModal(false);
+                    } catch (error) {
+                        console.error('Error when sending password reset email.', error);
+                    }
+                }}
+                heading="Forgot password"
+                placeholderText="email"
+            >
+               
+            </Modal>
         </div>
     )
 } 

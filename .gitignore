@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 .env
 backend/serviceAccountKey.js
+backend/functions/serviceAccountKey.js

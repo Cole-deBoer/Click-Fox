@@ -1,8 +1,8 @@
-import userModel from '../models/userModel.js'
+const userModel = require('../models/userModel');
 
 // Function used for creating users in the database.
 // This should only be called once per user. 
-export const createUser = async (req, res) => {
+const createUser = async (req, res) => {
     try {
         const {username, email, firebaseUid, testsTaken, maxCPSOneSecond, maxCPSFiveSeconds,
             maxCPSTenSeconds, maxCPSFiveClicks, maxCPSTenClicks} = req.body;
@@ -66,7 +66,7 @@ export const createUser = async (req, res) => {
     }
 }
 
-export const getUser = async (req, res) => {
+const getUser = async (req, res) => {
     try {
         const uid = req.params?.uid;
         
@@ -97,7 +97,7 @@ export const getUser = async (req, res) => {
     }
 }
 
-export const deleteUser = async (req, res) => {
+const deleteUser = async (req, res) => {
     try {
         const uid = req.params?.uid;
 
@@ -121,3 +121,9 @@ export const deleteUser = async (req, res) => {
         res.status(500).json({ message: 'Internal Server Error', error: error });
     }
 }
+
+module.exports = {
+    createUser,
+    getUser,
+    deleteUser
+};

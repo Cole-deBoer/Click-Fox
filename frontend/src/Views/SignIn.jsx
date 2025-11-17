@@ -2,7 +2,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import createUser from '../Requests/CreateUser';
-import UsernameModal from '../Components/UsernameModal'
+import Modal from '../Components/Modal'
 import RegistrationSection from '../Components/RegistrationSection';
 import LoginSection from '../Components/LoginSection';
 import { AuthContext } from '../Context/AuthContext';
@@ -27,7 +27,7 @@ const SignIn = () => {
             <LoginSection setGoogleAuthUserData={(firebaseUid, email) => setGoogleAuthUserData(firebaseUid, email)}
              setShowUsernameModal={(boolean) => setShowUsernameModal(boolean)}/>
 
-            <UsernameModal
+            <Modal
                 show={showUsernameModal}
                 onCancel={() => {
                     setShowUsernameModal(false);
@@ -38,6 +38,9 @@ const SignIn = () => {
                     setShowUsernameModal(false);
                     navigate('/');
                 }}
+                heading='Complete your profile'
+                subheading='Please choose a unique username'
+                placeholderText='username'
             />
         </div>
     );
