@@ -50,6 +50,9 @@ node_modules/
 # Optional npm cache directory
 .npm
 
+# from firebase functions .gitignore
+*.local 
+
 # Optional eslint cache
 .eslintcache
 

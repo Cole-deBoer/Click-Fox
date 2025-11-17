@@ -1,10 +1,10 @@
-import {auth} from '../firebase-config.js'
+const auth = require('../firebase-config');
 
 // Function for verifying the token of a user. Ensure that the passed token is the Firebase token.
 // method may not work properly if passed the GoogleAuthProvider token or the GithubAuthProvider token.
 // req is expecting a Bearer the header
 // res will return the status of the verification
-export const verifyToken = async (req, res, next) => {
+const verifyToken = async (req, res, next) => {
     const header = req.headers.authorization;
     if(!header) return res.status(401).json({message: 'Missing or invalid token'});
 
@@ -21,3 +21,5 @@ export const verifyToken = async (req, res, next) => {
         return res.status(401).json({message: 'Token Verification Failed', error: error})
     }
 };
+
+module.exports = verifyToken;

@@ -19,7 +19,7 @@ const createUser = async (username = '', email = '', firebaseUid = '', logRespon
     let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'http://localhost:3000/api/user/create',
+        url: 'https://us-central1-click-fox.cloudfunctions.net/api/user/create',
         headers: { 
             'Content-Type': 'application/json', 
         },

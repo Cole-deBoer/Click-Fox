@@ -10,7 +10,7 @@ import mouse from "../Assets/mouse.svg"
 const Elements = [
     {Display: <strong className='text-md md:text-2xl'>Click-Fox</strong>, Route: '/'},
     {Display: <img className='h-1/2 md:h-2/3 scale-75 md:scale-90' src={mouse} alt="click logo" />, Route: '/'},
-    {Display: <img className='h-1/2 md:h-2/3 scale-75 md:scale-90' src={crown} alt="leaderboard" />, Route: '/leaderboard'},
+    //{Display: <img className='h-1/2 md:h-2/3 scale-75 md:scale-90' src={crown} alt="leaderboard" />, Route: '/leaderboard'},
 ]
 
 const Navbar = () => {

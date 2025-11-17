@@ -1,7 +1,7 @@
-import userModel from "../models/userModel.js"
+const userModel = require('../models/userModel');
 
 // ensure users are passing a results object insde the request body
-export const results = async (req, res) => {
+const results = async (req, res) => {
     try {
         const userResults = req.body.results;
         
@@ -83,3 +83,5 @@ export const results = async (req, res) => {
         return res.status(500).json({message: 'Internal server error', error: error})
     }
 }
+
+module.exports = results

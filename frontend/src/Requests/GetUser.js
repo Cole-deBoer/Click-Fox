@@ -7,7 +7,7 @@ const getUser = async (uid ='', logResponse = false) => {
     let config = {
         method: 'get',
         maxBodyLength: Infinity,
-        url: `http://localhost:3000/api/user/${uid}`
+        url: `https://us-central1-click-fox.cloudfunctions.net/api/user/${uid}`
       };
     
     const response = await axios.request(config);

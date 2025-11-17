@@ -2,15 +2,15 @@ import React, {useEffect, useState, useRef} from "react";
 import Button from "./Button";
 import CredentialInput from "./CredentialInput";
 
-const UsernameModal = ({ show = false, onCancel = () => {}, onSubmit = () => {}}) => {
+const Modal = ({ show = false, onCancel = () => {}, onSubmit = () => {}, 
+                heading = '', subheading = '', placeholderText = '' }) => {
     const [error, setError] = useState('');
-    const username = useRef(null);
-    const backgroundRef = useRef(null);
+    const credential = useRef(null);
+    const modalRef = useRef(null);
     
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if(backgroundRef.current && !backgroundRef.current.contains(event.target)) {
-                console.log('not showing');
+            if(modalRef.current && !modalRef.current.contains(event.target)) {
                 onCancel();
             }
         }
@@ -24,12 +24,12 @@ const UsernameModal = ({ show = false, onCancel = () => {}, onSubmit = () => {}}
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!username.current.value.trim()) {
+        if (!credential.current.value.trim()) {
             setError('Username cannot be empty.');
             return;
         }
         setError('');
-        onSubmit(username.current.value);
+        onSubmit(credential.current.value);
     };
 
     if (!show) {
@@ -39,12 +39,12 @@ const UsernameModal = ({ show = false, onCancel = () => {}, onSubmit = () => {}}
 
     return (
         <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-            <div ref={backgroundRef} className="p-8 bg-zinc-700 rounded-lg shadow-lg text-zinc-200 xl:scale-125">
-                <h3 className="text-xl font-bold mb-4 text-center">Complete Your Profile</h3>
-                <p className="mb-4 text-center">Please choose a unique username.</p>
+            <div ref={modalRef} className="p-8 bg-zinc-700 rounded-lg shadow-lg text-zinc-200 xl:scale-125">
+                <h3 className="text-xl font-bold mb-4 text-center">{heading}</h3>
+                <p className="mb-4 text-center">{subheading}</p>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                        <CredentialInput type='text' placeholder='enter username' ref={username}/>
+                        <CredentialInput type='text' placeholder={placeholderText} ref={credential}/>
                         {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
                     </div>
                     <Button content={
@@ -61,4 +61,4 @@ const UsernameModal = ({ show = false, onCancel = () => {}, onSubmit = () => {}}
     );
 };
 
-export default UsernameModal;
+export default Modal;

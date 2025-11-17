@@ -12,7 +12,7 @@ const UpdateUserStats = async (uid = '', statName = '', statValue = 0, token = '
     let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: 'http://localhost:3000/api/results',
+        url: 'https://us-central1-click-fox.cloudfunctions.net/api/results',
         headers: { 
             'Content-Type': 'application/json', 
             'Authorization': `Bearer ${token}`
