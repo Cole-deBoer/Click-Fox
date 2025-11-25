@@ -6,10 +6,12 @@ import Modal from '../Components/Modal'
 import RegistrationSection from '../Components/RegistrationSection';
 import LoginSection from '../Components/LoginSection';
 import { AuthContext } from '../Context/AuthContext';
+import { Toast } from '../Components/Toast';
 
 const SignIn = () => {
     const [showUsernameModal, setShowUsernameModal] = useState(false);
     const [googleAuthUserData, setGoogleAuthUserData] = useState(null);   
+    const [error, setError] = useState(null);   
 
     const navigate = useNavigate();
     const user = useContext(AuthContext);
@@ -31,6 +33,7 @@ const SignIn = () => {
                 show={showUsernameModal}
                 onCancel={() => {
                     setShowUsernameModal(false);
+                    setError('Account Creation Cancelled.');
                 }}
                 onSubmit={async (username)=>{
                     const {email, firebaseUid} = googleAuthUserData;
@@ -42,6 +45,7 @@ const SignIn = () => {
                 subheading='Please choose a unique username'
                 placeholderText='username'
             />
+            {error != null && <Toast message={error} setMessage={(message) => setError(message)}/>}
         </div>
     );
 };

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const UpdateUserStats = async (uid = '', statName = '', statValue = 0, token = '', logResponse = false) => {
+const UpdateUserStats = async (uid = '', statName = '', statValue = 0, token = '', logResponse = false, setError = (errorMessage) => {}) => {
 
     let data = JSON.stringify({
         "results": {
@@ -27,11 +27,13 @@ const UpdateUserStats = async (uid = '', statName = '', statValue = 0, token = '
             if(response.status === 200) {
                 console.log(response.data);
             } else {
+                setError(JSON.stringify(response.data));
                 console.error(JSON.stringify(response.data));
             }
         }
         return response;        
     } catch (error) {
+        setError(error);
         console.error('error sending results', error);
     }
 }

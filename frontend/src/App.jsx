@@ -9,13 +9,13 @@ import LeaderboardView from './Views/LeaderboardView';
 import ProfileView from './Views/ProfileView';
 import SignIn from './Views/SignIn'; // Import SignIn component
 
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
 
 const App = () => {
   return (
     <AuthProvider>
-      <div className='w-full h-screen text-zinc-200 bg-zinc-800 font-sans flex flex-col min-h-screen gap-16 overflow-auto [&::-webkit-scrollbar]:hidden'>
+      <div className='w-full h-screen text-zinc-200 bg-zinc-800 font-mono flex flex-col min-h-screen gap-16 overflow-auto [&::-webkit-scrollbar]:hidden'>
         <div className='h-1/6'>
           <Navbar></Navbar>
         </div>
