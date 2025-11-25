@@ -2,7 +2,7 @@ import axios from 'axios';
 
 /**  returns the response of the request, this is standard for all requests in this codebase.
 */
-const createUser = async (username = '', email = '', firebaseUid = '', logResponse = false) => {
+const createUser = async (username = '', email = '', firebaseUid = '', logResponse = false, setError = (errorMessage) => {}) => {
     let data = JSON.stringify({
         "username": username,
         "email": email,
@@ -32,6 +32,7 @@ const createUser = async (username = '', email = '', firebaseUid = '', logRespon
             console.log(response.data.message);
         }
         else {
+            setError(response.message);
             console.error(response);
         }
     }

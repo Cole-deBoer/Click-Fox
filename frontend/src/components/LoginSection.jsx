@@ -1,14 +1,15 @@
-import React, {useRef} from "react";
+import React, {useRef, useState} from "react";
 import { useNavigate } from 'react-router-dom';
 import { handleSignIn, handleGoogleSignIn } from '../registration';
 import {sendPasswordResetEmail} from 'firebase/auth'
 import {getAuth} from 'firebase/auth'
 
-
 import CredentialInput from "./CredentialInput";
 import Button from "./Button";
+import { Toast } from "./Toast";
 import Modal from "./Modal";
-import {useState} from "react";
+
+import googleLogo from '../Assets/google-icon.svg';
 
 const LoginSection = ({setGoogleAuthUserData = (firebaseUid, email) => {}, setShowUsernameModal = (boolean) => {}}) => {
     const email = useRef(null);  
@@ -17,18 +18,20 @@ const LoginSection = ({setGoogleAuthUserData = (firebaseUid, email) => {}, setSh
 
     const auth = getAuth();
     const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
+    const [error, setError] = useState(null);
 
     return (
         <div className="w-full md:w-1/2 lg:w-1/3 p-8">
             <h2 className="font-bold mb-2">
-                <span className="text-xl">login</span>
+                <span className="text-xl">Login</span>
             </h2>
             <Button content={
                 <div className="flex py-2 justify-center bg-zinc-900 rounded-lg text-center text-lg hover:bg-opacity-100" onClick={() => {
                     handleGoogleSignIn((firebaseUid, email) => {setGoogleAuthUserData(firebaseUid, email)},
-                                        (boolean) => {setShowUsernameModal(boolean)}, (route) => navigate(route));
+                                       (boolean) => {setShowUsernameModal(boolean)}, 
+                                       (route) => navigate(route), (message) => setError(message));
                     }}>
-                    <>google</>
+                    <img width={24} height={24} src={googleLogo}/>
                 </div>
                 }>
             </Button>
@@ -39,7 +42,9 @@ const LoginSection = ({setGoogleAuthUserData = (firebaseUid, email) => {}, setSh
                 </div>
             </div>
 
-            <form onSubmit={(e) => handleSignIn(e, email.current.value, password.current.value, (route) => navigate(route))} className="space-y-4">
+            <form onSubmit={(e) => handleSignIn(e, email.current.value, password.current.value, 
+                            (route) => navigate(route), (message) => setError(message))} className="space-y-4">
+
                 <CredentialInput type='email' placeholder='email' ref={email}/>
                 <CredentialInput type='password' placeholder='password' ref={password}/>
                 
@@ -64,6 +69,7 @@ const LoginSection = ({setGoogleAuthUserData = (firebaseUid, email) => {}, setSh
                 show={showForgotPasswordModal}
                 onCancel={() => {
                     setShowForgotPasswordModal(false);
+                    setError('Password Reset Process Not Completed.');
                 }}
                 onSubmit={async (email) => {
                     try {
@@ -78,6 +84,8 @@ const LoginSection = ({setGoogleAuthUserData = (firebaseUid, email) => {}, setSh
             >
                
             </Modal>
+            {error != null && <Toast message={error} setMessage={(message) => setError(message)}/>}
+
         </div>
     )
 } 

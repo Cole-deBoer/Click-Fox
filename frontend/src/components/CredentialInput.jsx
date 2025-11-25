@@ -8,7 +8,7 @@ const CredentialInput = forwardRef((props, ref) => {
             ref={ref}
             className="w-full px-3 py-3 rounded-lg placeholder-zinc-200 focus:outline-none text-sm md:text-md  bg-zinc-900 opacity-40 text-zinc-200"
             placeholder={placeholder}
-            autoComplete={placeholder}
+            autoComplete=''
             required
         ></input>
     )

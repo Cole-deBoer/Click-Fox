@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const GetToken = async (email = '', password = '', logResponse = false) => {
+const GetToken = async (email = '', password = '', logResponse = false, setError = (errorMessage) => {}) => {
 
     let data = JSON.stringify({
         "email": email,
@@ -25,11 +25,13 @@ const GetToken = async (email = '', password = '', logResponse = false) => {
             if(response.status === 200) {
                 console.log(JSON.stringify(response.data));
             } else {
+                setError(response.message);
                 console.error(response);
             }
         }
         return response;        
     } catch (error) {
+        setError(error);
         console.error('error sending results', error);
     }
 }

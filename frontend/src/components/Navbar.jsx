@@ -1,6 +1,6 @@
-import React, {useContext} from "react";
+import React, { useContext } from "react";
 import Button from "./Button";
-import {Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from '../Context/AuthContext';
 
 // svg images
@@ -41,11 +41,11 @@ const Navbar = () => {
                     ))}
                 </nav>
 
-                {/* Profile Element (Right Aligned*/}
+                {/* Profile Element (Right Aligned)*/}
                 <nav className="mx-2">
                     <div onClick={handleProfileClick}>
                         <Button content={
-                            <b className="font-mono text-md md:text-2xl">
+                            <b className="text-md md:text-2xl">
                                 Profile
                             </b>
                         }/>
