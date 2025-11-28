@@ -1,6 +1,12 @@
 # Click-Fox
 
-A modern web application for testing clicking speed and reaction time.
+A modern web application for testing clicking speed.
+
+## Example Video
+
+
+![click-fox](https://github.com/user-attachments/assets/2cf36e63-95ea-475e-b00e-ceafdd2ee910)
+
 
 ## Tech Stack
 
@@ -13,11 +19,12 @@ A modern web application for testing clicking speed and reaction time.
 ### Backend
 - **Express.js** - Node.js web framework
 - **MongoDB** - NoSQL database with Mongoose ODM
-- **Firebase** - Authentication and hosting
+- **Firebase** - Authentication, hosting, and functions
 
 ### Infrastructure
 - **Firebase Hosting** - Static site hosting
 - **Firebase Authentication** - User management
+- **Firebase Functions** - Cloud functions 
 - **MongoDB Atlas** - Cloud database
 
 ## Project Structure
