@@ -36,8 +36,11 @@ const ProfileView = () => {
     return (
         <div className="w-full h-full text-white flex flex-col md:content-center">
             <div className="container h-full mx-auto p-4 flex-grow">
-                <div className="xl:py-12 mb-8 p-6 bg-zinc-700 rounded-lg shadow-lg flex items-center">
-                    <div className="w-24 h-24 bg-zinc-800 opacity-70 rounded-full flex items-center justify-center text-4xl text-gray-400 mr-6">
+                <div className="xl:py-12 mb-8 p-6 bg-zinc-700 rounded-lg shadow-lg flex flex-col sm:flex-row items-center">
+                    <div className="w-24 h-24 bg-zinc-800 opacity-70 rounded-full flex items-center justify-center
+                                    text-4xl text-gray-400 mr-6" onClick={() =>{
+                                        //Logic for updating profile photo
+                                    }}>
                         <img src={userIcon} className='w-4/5'></img>
                     </div>
                     <div>
