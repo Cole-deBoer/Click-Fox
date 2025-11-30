@@ -8,6 +8,7 @@ import GameView from './Views/GameView';
 import LeaderboardView from './Views/LeaderboardView';
 import ProfileView from './Views/ProfileView';
 import SignIn from './Views/SignIn'; // Import SignIn component
+import About from './Views/About';
 
 import { Route, Routes } from 'react-router-dom';
 
@@ -26,6 +27,7 @@ const App = () => {
             <Route path="/signin" element={<SignIn/>}/> 
             <Route path="/profile" element={<ProfileView/>}/>
             <Route path="/leaderboard" element={<LeaderboardView/>}/>
+            <Route path="/about" element={<About/>}/>
           </Routes>
         </div>
 
