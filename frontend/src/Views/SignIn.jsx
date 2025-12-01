@@ -9,6 +9,11 @@ import { AuthContext } from '../Context/AuthContext';
 import { Toast } from '../Components/Toast';
 
 const SignIn = () => {
+    useEffect(() => {
+        document.title = "Click-Fox | Sign In";
+        document.querySelector('meta[name="description"]').setAttribute('content', 'Sign in or create an account to save your clicking test scores and track your progress.');
+    }, []);
+
     const [showUsernameModal, setShowUsernameModal] = useState(false);
     const [googleAuthUserData, setGoogleAuthUserData] = useState(null);   
     const [error, setError] = useState(null);   
@@ -23,7 +28,7 @@ const SignIn = () => {
     }, [])
 
     return (
-        <div className="flex flex-col md:flex-row items-start justify-center bg-zinc-800 text-zinc-200 p-4 gap-16">
+        <main className="flex flex-col md:flex-row items-start justify-center bg-zinc-800 text-zinc-200 p-4 gap-16">
             <RegistrationSection/>
 
             <LoginSection setGoogleAuthUserData={(firebaseUid, email) => setGoogleAuthUserData(firebaseUid, email)}
@@ -46,7 +51,7 @@ const SignIn = () => {
                 placeholderText='username'
             />
             {error != null && <Toast message={error} setMessage={(message) => setError(message)}/>}
-        </div>
+        </main>
     );
 };
 

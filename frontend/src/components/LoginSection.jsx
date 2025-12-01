@@ -45,8 +45,8 @@ const LoginSection = ({setGoogleAuthUserData = (firebaseUid, email) => {}, setSh
             <form onSubmit={(e) => handleSignIn(e, email.current.value, password.current.value, 
                             (route) => navigate(route), (message) => setError(message))} className="space-y-4">
 
-                <CredentialInput type='email' placeholder='email' ref={email}/>
-                <CredentialInput type='password' placeholder='password' ref={password}/>
+                <CredentialInput type='email' placeholder='email' ref={email} autoCompleteType='email'/>
+                <CredentialInput type='password' placeholder='password' ref={password} autoCompleteType='current-password'/>
                 
                 <div className='w-full'>
                     <Button content={

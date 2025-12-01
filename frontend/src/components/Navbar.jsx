@@ -34,10 +34,10 @@ const Navbar = () => {
                 <nav className="flex mx-2 gap-0 md:gap-1">
 
                     {/* Logo with text */}
-                    <div className="h-8 md:h-10 mr-2 flex space-x-1 select-none cursor-pointer" onClick={() => navigate('/')}>
+                    <Link to="/" className="h-8 md:h-10 mr-2 flex space-x-1 select-none cursor-pointer">
                         <img src={clickFoxLogo} alt="click-fox logo" className="bg-blend-difference"/> 
                         <strong className="text-xl md:text-3xl">click-fox</strong>
-                    </div>
+                    </Link>
 
                     {/* other left alligned elements */}
                     {Elements.map((element, key) => (

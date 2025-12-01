@@ -16,12 +16,13 @@ import { Route, Routes } from 'react-router-dom';
 const App = () => {
   return (
     <AuthProvider>
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:bg-white focus:text-black focus:p-3">Skip to main content</a>
       <div className='w-full h-screen text-zinc-200 bg-zinc-800 font-mono flex flex-col min-h-screen gap-16 overflow-auto [&::-webkit-scrollbar]:hidden'>
         <div className='h-1/6'>
           <Navbar></Navbar>
         </div>
 
-        <div className='grow'>
+        <div className='grow' id="main-content">
           <Routes>
             <Route path="/" element={<GameView/>}/>
             <Route path="/signin" element={<SignIn/>}/> 

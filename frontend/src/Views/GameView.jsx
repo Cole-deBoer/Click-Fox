@@ -23,6 +23,8 @@ const GameView = () => {
     const [startTime, setStartTime] = useState(0.0);
     
     useEffect(() => {
+        document.title = "Click-Fox | Click Speed Test";
+        document.querySelector('meta[name="description"]').setAttribute('content', 'Test and improve your mouse clicking speed with various game modes. See how fast you can click!');
         const seconds = Math.ceil(gameDuration);
         
         // Bucket into per-second counts
@@ -76,7 +78,7 @@ const GameView = () => {
         }
         
     return (
-        <div className="h-4/6 2xl:scale-110 content-center">  
+        <main className="h-4/6 2xl:scale-110 content-center">  
             {shouldShowResults ?
             <Results clickCount={clickCount} 
             testDuration={gameDuration} 
@@ -109,7 +111,7 @@ const GameView = () => {
                     handleClick={handleClick}
                 />                                        
             </>}
-        </div>
+        </main>
     );
 }
 

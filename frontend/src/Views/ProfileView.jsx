@@ -1,4 +1,4 @@
-import React, { useState, useContext, useLayoutEffect } from 'react';
+import React, { useState, useContext, useLayoutEffect, useEffect } from 'react';
 import StatCard from '../Components/StatCard';
 import userIcon from '../Assets/user-round.svg'
 import getUser from '../Requests/GetUser';
@@ -8,6 +8,11 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../Components/Button';
 
 const ProfileView = () => {
+    useEffect(() => {
+        document.title = "Click-Fox | User Profile";
+        document.querySelector('meta[name="description"]').setAttribute('content', 'View your Click-Fox profile, stats, and clicking test history.');
+    }, []);
+
     const [userData, setUserData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -34,14 +39,14 @@ const ProfileView = () => {
     const auth = getAuth();
 
     return (
-        <div className="w-full h-full text-white flex flex-col md:content-center">
+        <main className="w-full h-full text-white flex flex-col md:content-center">
             <div className="container h-full mx-auto p-4 flex-grow">
                 <div className="xl:py-12 mb-8 p-6 bg-zinc-700 rounded-lg shadow-lg flex flex-col sm:flex-row items-center">
                     <div className="w-24 h-24 bg-zinc-800 opacity-70 rounded-full flex items-center justify-center
                                     text-4xl text-gray-400 mr-6" onClick={() =>{
                                         //Logic for updating profile photo
                                     }}>
-                        <img src={userIcon} className='w-4/5'></img>
+                        <img src={userIcon} className='w-4/5' alt="User profile icon"></img>
                     </div>
                     <div>
                         <h1 className="text-4xl font-bold">{isLoading ? 'Loading...' : `${userData?.username}`}</h1>
@@ -75,7 +80,7 @@ const ProfileView = () => {
                     }/>
                 </div>
             </div>
-        </div>
+        </main>
     );
 };
 

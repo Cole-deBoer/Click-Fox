@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const About = () => {
+  useEffect(() => {
+    document.title = "Click-Fox | About";
+    document.querySelector('meta[name="description"]').setAttribute('content', 'Learn more about Click-Fox, a modern web application for testing clicking speed, and its tech stack.');
+  }, []);
+
   return (
     <div className="min-h-screen bg-zinc-800 text-zinc-200 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-4xl space-y-16 mx-auto text-center">
+      <main className="max-w-4xl space-y-16 mx-auto text-center">
         {/* into section */}
         <h1 className="text-5xl font-extrabold mb-6">Click-Fox</h1>
         <p className="text-xl mb-6 max-w-2xl mx-auto">
@@ -50,7 +55,6 @@ const About = () => {
             </div>
           </div>
         </section>
-
         {/* section seperator */}
         <div className='h-px w-full border-2 border-zinc-500 rounded-xl'></div>
 
@@ -61,7 +65,7 @@ const About = () => {
             This project is open source and available under the MIT License.
           </p>
         </section>
-      </div>
+      </main>
     </div>
   );
 };

@@ -27,11 +27,11 @@ const RegistrationSection = () => {
                 password.current.value, verifyPassword.current.value, (route) => navigate(route), (message) => setError(message));
             }} className="space-y-5 md:space-y-3">
 
-                <CredentialInput type="text" ref={username} placeholder='username' />
-                <CredentialInput type="email" ref={email} placeholder='email' />
-                <CredentialInput type="email" ref={verifyEmail} placeholder='verify email' />
-                <CredentialInput type="password" ref={password} placeholder='password' />
-                <CredentialInput type="password" ref={verifyPassword} placeholder='verify password' />
+                <CredentialInput type="text" ref={username} placeholder='username' autoCompleteType='username'/>
+                <CredentialInput type="email" ref={email} placeholder='email' autoCompleteType='email'/>
+                <CredentialInput type="email" ref={verifyEmail} placeholder='verify email' autoCompleteType='email'/>
+                <CredentialInput type="password" ref={password} placeholder='password' autoCompleteType='new-password'/>
+                <CredentialInput type="password" ref={verifyPassword} placeholder='verify password' autoCompleteType='new-password'/>
 
                 <div className='w-full justify-center'>
                     <Button content={
